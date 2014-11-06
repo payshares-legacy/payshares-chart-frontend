@@ -3,20 +3,9 @@ function CapitalizationChart() {
 
 // Hard-coded constants
 var GATEWAY_NAMES = { // Gateways we're going to look at
-  rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B:  "Bitstamp",
-  razqQKzJRdB4UxFPWf5NEpEG3WMkmwgcXA: "RippleChina",
-  rnuF96W4SZoCJmbHYBFoJZpR8eCaxNvekK: "RippleCN",
-  rNPRNzBB92BVpAhhZr4iXDTveCgV5Pofm9: "RippleIsrael",
-  rMwjYedjc7qqtKYVLiAccJSmCwih4LnE2q: "SnapSwap",
-  rLEsXccBGNR3UPuPu2hUXPjziKC3qKSBun: "The Rock",
-  rPDXxSZcuVL3ZWoyU82bcde3zwvmShkRyF: "WisePass",
-  rfYv1TXnwgDDK4WQNbFALykYuEBnrR4pDX: "Div. Rippler",
-  rGwUWgN5BEg3QGNY3RX2HfYowjUTZdid3E: "TTBit",
-  r3ADD8kXSUKHd6zTCKfnKT3zV9EZHjzp1S: "Ripple Union",
-  rkH1aQbL2ajA7HUsx8VQRuL3VaEByHELm:  "Ripple Money",
-  rJHygWcTLVpSXkowott6kzgZU6viQSVYM1: "Justcoin",
-  rM8199qFwspxiWNZRChZdZbGN5WrCepVP1: "XRP China",
-  ra9eZxMbJrUcgV8ui7aPc161FgrqWScQxV: "Peercover"
+  gnhPFpbYXcYGMkGxfWdQGFfuKEdJoEThVo: "Justcoin",
+  gs9HHU3pmkKBuvykhNm6xiK1JKrput9i3K: "Coinex",
+  gDSSa75HPagWcvQmwH7D51dT5DPmvsKL4q: "Stellar",
 };
 var CURRENCIES_LIST = ["USD","CNY","EUR","BTC","LTC","NMC"]; // Currencies we're going to look at
 var GATEWAY_NAME_ABBREVIATIONS = {

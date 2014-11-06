@@ -99,8 +99,8 @@ var PriceChartWidget = function (options) {
     
     var params = getParams();
     
-    if (!params.base)    params.base    = {currency:"XRP", issuer:""};
-    if (!params.counter) params.counter = {currency:"USD", issuer:"rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B"}; 
+    if (!params.base)    params.base    = {currency:"STR", issuer:""};
+    if (!params.counter) params.counter = {currency:"USD", issuer:"gDSSa75HPagWcvQmwH7D51dT5DPmvsKL4q"}; 
     if (!params.type)    params.type    = "line";
     if (!params.theme)   params.theme   = "light"; 
     

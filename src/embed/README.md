@@ -34,7 +34,7 @@ of loading from the query string or from custom parameters.
 ####Embedded IFRAME:
 
 ```
-<iframe src='http://ripplecharts.com/embed/pricechart?theme=dark&type=line&counter={"currency":"USD","issuer":"rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B"}&base={"currency":"XRP"}'/>
+<iframe src='http://ripplecharts.com/embed/pricechart?theme=dark&type=line&counter={"currency":"USD","issuer":"gDSSa75HPagWcvQmwH7D51dT5DPmvsKL4q"}&base={"currency":"XRP"}'/>
 ```
 
 ####Javascript object:
@@ -62,7 +62,7 @@ of loading from the query string or from custom parameters.
    },
    counter : {
      "currency" : "USD",
-     "issuer" : "rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B"
+     "issuer" : "gDSSa75HPagWcvQmwH7D51dT5DPmvsKL4q"
    },
      
    interval : "hour",
@@ -81,7 +81,7 @@ of loading from the query string or from custom parameters.
    },
    counter : {
      "currency" : "USD",
-     "issuer" : "rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B"
+     "issuer" : "gDSSa75HPagWcvQmwH7D51dT5DPmvsKL4q"
    },
    
    interval : "hour",

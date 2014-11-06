@@ -49,7 +49,7 @@ angular.module( 'stellarcharts.markets', [
     Options.base || {currency:"STR", issuer:""};
   
   $scope.trade = store.session.get('trade') || store.get('trade') || 
-    Options.trade || {currency:"USD", issuer:"rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B"};
+    Options.trade || {currency:"USD", issuer:"gDSSa75HPagWcvQmwH7D51dT5DPmvsKL4q"};
   
   $scope.chartType = store.session.get('chartType') || store.get('chartType') || 
     Options.chartType || "line";

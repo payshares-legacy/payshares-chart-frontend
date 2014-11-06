@@ -22,11 +22,12 @@ angular.module( 'stellarcharts.landing', [
 
   var exchangeRates   = {};
   var valueCurrencies = {
-    "USD" : "rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B",  //bitstamp
-    "EUR" : "rMwjYedjc7qqtKYVLiAccJSmCwih4LnE2q", //snapswap
-    "JPY" : "rMAz5ZnK73nyNUL4foAvaxdreczCkG3vA6", //ripple trade japan
-    "CNY" : "razqQKzJRdB4UxFPWf5NEpEG3WMkmwgcXA", //rippleChina
-    "XRP" : ""
+    "USD" : "gs9HHU3pmkKBuvykhNm6xiK1JKrput9i3K",  //bitstamp
+    "EUR" : "gnhPFpbYXcYGMkGxfWdQGFfuKEdJoEThVo", //snapswap
+    "LTC" : "gnhPFpbYXcYGMkGxfWdQGFfuKEdJoEThVo", //stellar trade japan
+    "XRP" : "gnhPFpbYXcYGMkGxfWdQGFfuKEdJoEThVo", //stellarChina
+    "BTC" : "gnhPFpbYXcYGMkGxfWdQGFfuKEdJoEThVo", //stellarChina
+    "STR" : ""
   }
   
   var totalAccounts
@@ -79,23 +80,23 @@ angular.module( 'stellarcharts.landing', [
   
   markets.list([
     {
-      base    : {currency:"XRP"},
-      counter : {currency:"USD", issuer:"rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B"}
+      base    : {currency:"STR"},
+      counter : {currency:"USD", issuer:"gs9HHU3pmkKBuvykhNm6xiK1JKrput9i3K"}
     }, {
-      base    : {currency:'XRP'},
-      counter : {currency:'JPY', issuer: 'rMAz5ZnK73nyNUL4foAvaxdreczCkG3vA6'}
+      base    : {currency:'STR'},
+      counter : {currency:'LTC', issuer: 'gnhPFpbYXcYGMkGxfWdQGFfuKEdJoEThVo'}
     }, {
-      base    : {currency:'BTC', issuer: 'rMwjYedjc7qqtKYVLiAccJSmCwih4LnE2q'},
-      counter : {currency:'XRP'}
+      base    : {currency:'BTC', issuer: 'gnhPFpbYXcYGMkGxfWdQGFfuKEdJoEThVo'},
+      counter : {currency:'STR'}
     }, {
-      base    : {currency:"XRP"},
-      counter : {currency:"CNY", issuer:"rnuF96W4SZoCJmbHYBFoJZpR8eCaxNvekK"}
+      base    : {currency:"EUR", issuer:"gnhPFpbYXcYGMkGxfWdQGFfuKEdJoEThVo"},
+      counter : {currency:"STR"}
     }, {
-      base    : {currency:'XRP'},
-      counter : {currency:'USD', issuer: 'rMwjYedjc7qqtKYVLiAccJSmCwih4LnE2q'}
+      base    : {currency:'STR'},
+      counter : {currency:'XRP', issuer: 'gnhPFpbYXcYGMkGxfWdQGFfuKEdJoEThVo'}
     }, {
-      base    : {currency:"BTC", issuer:"rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B"},
-      counter : {currency:"XRP"}
+      base    : {currency:"SCT", issuer:"gDSSa75HPagWcvQmwH7D51dT5DPmvsKL4q"},
+      counter : {currency:"STR"}
     }
     ]);
 
