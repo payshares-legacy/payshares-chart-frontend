@@ -1,4 +1,4 @@
-angular.module( 'ripplecharts.multimarkets', [
+angular.module( 'stellarcharts.multimarkets', [
   'ui.state',
   'ui.bootstrap'
 ])

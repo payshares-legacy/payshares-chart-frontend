@@ -20,13 +20,13 @@ var GATEWAY_NAMES = { // Gateways we're going to look at
 };
 var CURRENCIES_LIST = ["USD","CNY","EUR","BTC","LTC","NMC"]; // Currencies we're going to look at
 var GATEWAY_NAME_ABBREVIATIONS = {
-  "Dividend Rippler": "Div. Rippler",
+  "Dividend Stellarr": "Div. Stellarr",
   "The Rock Trading": "The Rock"
 };
 var CURRENCIES = { // Currencies you can measure value in
-  "BTC":["Bitstamp", "Dividend Rippler", "Justcoin", "RippleCN", "Peercover", "RippleIsrael", "The Rock Trading", "XRP China"],
+  "BTC":["Bitstamp", "Dividend Stellarr", "Justcoin", "StellarCN", "Peercover", "StellarIsrael", "The Rock Trading", "STR China"],
   "USD":["Bitstamp", "SnapSwap", "Peercover", "The Rock Trading"],
-  "CNY":["RippleCN", "RippleChina", "XRP China"],
+  "CNY":["StellarCN", "StellarChina", "STR China"],
   "EUR":["Bitstamp", "The Rock Trading"]
 };
 
@@ -46,7 +46,7 @@ for (var cur in CURRENCIES) {
 // State variables
 var waiting = true;
 var isBlank = true;
-var measureCurrency = "XRP";
+var measureCurrency = "STR";
 var measureIssuer;
 var distinction = "issuer";
 var monthsPast = 0;
@@ -92,7 +92,7 @@ function changeRange(that) {
 function changeCurrency(that) {
   var cur = $(that).val();
   measureCurrency = cur;
-  if (cur === "XRP") {
+  if (cur === "STR") {
     $("#gatewaySelector").addClass("invisible");
   } else {
     var currentGateway = $("#gatewaySelector").val();
@@ -422,7 +422,7 @@ function prepareData(response) {
 }
 
 function distinguishData(preparedData, distinction, currency, issuer) {
-  currency = currency || "XRP";
+  currency = currency || "STR";
   var oldHeading = preparedData.heading;
   var oldSeries = preparedData.series;
   var newHeading = [];
@@ -442,13 +442,13 @@ function distinguishData(preparedData, distinction, currency, issuer) {
       key = oldHeading[j][distinction];
       var rateKey = oldHeading[j].currency + ":" + oldHeading[j].issuer;
       var rate = currentXrpRates[rateKey] || 0;
-      if (currency !== "XRP") {
+      if (currency !== "STR") {
         var conversionKey = currency + ":" + issuer;
         var conversion = currentXrpRates[conversionKey];
         if (conversion) {
           rate /= conversion;
         } else {
-          console.log("ERROR: No exchange rate found; defaulting to XRP");
+          console.log("ERROR: No exchange rate found; defaulting to STR");
         }
       }
       var point = entry[j] * rate; //Apply exchange rate here
@@ -500,7 +500,7 @@ function distinguishData(preparedData, distinction, currency, issuer) {
 var numberOfCurrenciesAsked = CURRENCIES_LIST.length;
 for (var i=0; i<CURRENCIES_LIST.length; i++) {
   cur = CURRENCIES_LIST[i];
-  $.post("http://ct.ripple.com:5993/api/exchangeRates",{currencies: [cur,'XRP'], gateways: GATEWAYS_LIST}, recordRate);
+  $.post("http://ct.stellar.com:5993/api/exchangeRates",{currencies: [cur,'STR'], gateways: GATEWAYS_LIST}, recordRate);
 }
 var numberOfCurrenciesAnswered = 0;
 
@@ -508,9 +508,9 @@ function recordRate(response) {
   numberOfCurrenciesAnswered++;
   for (var i=0; i<response.length; i++) {
     var exchange = response[i];
-    if (exchange.base.currency === "XRP") {
+    if (exchange.base.currency === "STR") {
       var key = exchange.trade.currency + ":" + exchange.trade.issuer;
-      currentXrpRates[key] = 1/exchange.rate; //I.e. how many XRP is this worth?
+      currentXrpRates[key] = 1/exchange.rate; //I.e. how many STR is this worth?
     }
   }
 }
@@ -529,7 +529,7 @@ function requestData(monthsPast) {
     }
     
     var increment = {0:"months", 12:"weeks", 6:"weeks", 2:"days", 1:"hours"}[monthsPast];
-    $.post("http://ct.ripple.com:5993/api/gatewayCapitalization",
+    $.post("http://ct.stellar.com:5993/api/gatewayCapitalization",
     {currencies: CURRENCIES_LIST, gateways: GATEWAYS_LIST, timeIncrement: increment, startTime: startTime},
     function(response) {
       preparedData = prepareData(response);

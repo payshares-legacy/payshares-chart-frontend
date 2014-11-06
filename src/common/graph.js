@@ -44,7 +44,7 @@ var COLOR_TABLE = {
           ["#cbe0d0","#b9d0bd"],
           ["#e0ebe2","#d7e2d9"]],
       
-  "XRP": [["#55a7cc","#346aa9"],
+  "STR": [["#55a7cc","#346aa9"],
 /*BLUE*/  ["#83b8d6","#5083b9"],
           ["#a7cae1","#7ba1cb"],
           ["#d0e1ed","#a3c2dd"],
@@ -74,7 +74,7 @@ var HIGH_SATURATION_COLORS = {
   "EUR": "#af0", //YELLOW
   "USD": "#0f0", //LIME
   "AUD": "#0fa", //GREEN
-  "XRP": "#0af", //BLUE
+  "STR": "#0af", //BLUE
   "___": "#00f", //INDIGO
   "CAD": "#a0f", //VIOLET
   "JPY": "#f0a"  //PINK
@@ -124,7 +124,7 @@ function gotoThing() {
 
 
 var lastFocalNode = REFERENCE_NODE;
-var currentCurrency = "XRP";
+var currentCurrency = "STR";
 var currentLedger = {ledger_current_index: 2011754};
 var w = 935;  //Width
 var h = 1035; //Height
@@ -276,7 +276,7 @@ function handleTransaction(obj) {
 function handleLedger(err, obj) {
   currentLedger = obj.ledger;
   $("#ledgernumber").text(commas(parseInt(currentLedger.ledger_index, 10)));
-  $("#totalripples").text(commas(parseInt(currentLedger.total_coins, 10)/1000000));
+  $("#totalstellars").text(commas(parseInt(currentLedger.total_coins, 10)/1000000));
 }
 
 function handleAccountData(err, obj) {
@@ -291,14 +291,14 @@ function handleAccountData(err, obj) {
     } else {
       var n = nodes[nodeMap[obj.account_data.Account]];
       n.account = obj.account_data; //XXXX Uncaught TypeError: Cannot set property 'account' of undefined
-      if (currentCurrency == "XRP") { // Change the size of the circles, and recalculate the arrows.
+      if (currentCurrency == "STR") { // Change the size of the circles, and recalculate the arrows.
         updated = svg.select("g#nodeGroup").select("circle#_"+obj.account_data.Account);
         updated.attr("r", nodeRadius(n));
         svg.select("g#haloGroup").select("circle#halo_"+obj.account_data.Account).attr("r", HALO_MARGIN+nodeRadius(n));
       }
       if (obj.account_data.Account == focalNode) {
-        //Update the XRP listing on the table below. (But don't rewrite the whole table)
-        $("#xrpBalance").text(commas(n.account.Balance/1000000));
+        //Update the STR listing on the table below. (But don't rewrite the whole table)
+        $("#strBalance").text(commas(n.account.Balance/1000000));
       }
     }
   }
@@ -419,7 +419,7 @@ function enterTransactionMode(tx) {
     if (amount.currency) {
       currency = amount.currency;
     } else {
-      currency = "XRP";
+      currency = "STR";
     }
     var option = $("select#currency").find("option[value="+currency+"]");
     if (option.html()) {
@@ -551,7 +551,7 @@ function renderTransaction(tx) {
       currency = amount.currency;
       amount = amount.value;
     } else {
-      currency = "XRP";
+      currency = "STR";
       amount = amount/1000000;
     }
   }
@@ -560,7 +560,7 @@ function renderTransaction(tx) {
       secondCurrency = secondAmount.currency;
       secondAmount = secondAmount.value;
     } else {
-      secondCurrency = "XRP";
+      secondCurrency = "STR";
       secondAmount = secondAmount/1000000;
     }
   }
@@ -612,12 +612,12 @@ function clickableAccountSpan(address) {
 
 function txDescription(result) {
   console.log("TX INFO:",result);
-  var xrpExpense;
+  var strExpense;
   if (result.meta) {
     for (var i=0; i<result.meta.AffectedNodes.length; i++) {
       var an = result.meta.AffectedNodes[i];
       if (an.ModifiedNode && an.ModifiedNode.LedgerEntryType==="AccountRoot" && an.ModifiedNode.FinalFields.Account===result.Account) {
-        xrpExpense = {before:an.ModifiedNode.PreviousFields.Balance/1000000 , after:an.ModifiedNode.FinalFields.Balance/1000000};
+        strExpense = {before:an.ModifiedNode.PreviousFields.Balance/1000000 , after:an.ModifiedNode.FinalFields.Balance/1000000};
         break;
       }
     }
@@ -627,7 +627,7 @@ function txDescription(result) {
   var amount = result.meta.DeliveredAmount || result.Amount;
   if (amount) {
     var span = $("<span class='amount'/>");
-    span.html(amount.currency ? commas(amount.value)+" "+amount.currency : commas(amount/1000000)+" XRP");
+    span.html(amount.currency ? commas(amount.value)+" "+amount.currency : commas(amount/1000000)+" STR");
 
     div.append("<b>Amount:</b>")
       .append(span)
@@ -672,7 +672,7 @@ function txDescription(result) {
   });
     
   div.append((result.meta ? "<b>Result:</b> "+(result.meta.TransactionResult=="tesSUCCESS"?"<span>":"<span style='color:#900;'>")+result.meta.TransactionResult+"</span><br/>" : "")+
-    (xrpExpense||xrpExpense===0 ? "<b>XRP change:</b> "+commas(xrpExpense.before) + " XRP &rarr; "+commas(xrpExpense.after)+" XRP ("+(xrpExpense.after>=xrpExpense.before?"+":"&ndash;")+commas(Math.round(1000000*Math.abs(xrpExpense.before-xrpExpense.after))/1000000)+" XRP)<br/>" : "")+
+    (strExpense||strExpense===0 ? "<b>STR change:</b> "+commas(strExpense.before) + " STR &rarr; "+commas(strExpense.after)+" STR ("+(strExpense.after>=strExpense.before?"+":"&ndash;")+commas(Math.round(1000000*Math.abs(strExpense.before-strExpense.after))/1000000)+" STR)<br/>" : "")+
     (result.date ? "<b>Date:</b> "+absoluteDateOnly(result.date)+" "+absoluteTimeOnly(result.date)+"<br/>" : "")+
     (result.InvoiceID ? "<b>Invoice ID:</b> <tt>"+result.InvoiceID+"</tt><br/>" : "")+
     (result.DestinationTag ? "<b>Destination tag:</b> "+result.DestinationTag+"<br/>" : "")+
@@ -687,7 +687,7 @@ function txDescription(result) {
 
 function currentCurrencyBalance(accountNode) {
   var output;
-  if (currentCurrency == "XRP") {
+  if (currentCurrency == "STR") {
     output = accountNode.account.Balance;
   } else {
     output = accountNode.balances[currentCurrency];
@@ -710,7 +710,7 @@ function addConnections(origin, trustLines) {
     updateInformation(origin);
   }
   
-  if (currentCurrency != "XRP") { // Change the size of the circle, if we needed to wait until now to figure out its balance (i.e. we're looking at a currency other than XRP.)
+  if (currentCurrency != "STR") { // Change the size of the circle, if we needed to wait until now to figure out its balance (i.e. we're looking at a currency other than STR.)
     svg.select("g#nodeGroup")
       .select("circle#_"+origin)
       .attr("r", nodeRadius(nodes[nodeMap[origin]]) );
@@ -924,7 +924,7 @@ var nodeGroup = svg.append("g").attr("id","nodeGroup");
 
 function nodeRadius(accountNode) {
   var bal = currentCurrencyBalance(accountNode);
-  if (currentCurrency != "XRP") {
+  if (currentCurrency != "STR") {
     bal = bal * 1000000000;
   } 
   return 14+Math.pow(Math.log(Math.abs(bal)+1),3) / 2000;
@@ -937,7 +937,7 @@ var force = d3.layout.force()
   .size([(window.innerWidth > 0) ? window.innerWidth : screen.width, 710]) //w
   .linkDistance(80)
   .linkStrength(function(d) {
-    if (currentCurrency == "XRP" || currentCurrency == d.currency) {
+    if (currentCurrency == "STR" || currentCurrency == d.currency) {
       return d.strength * 0.25;
     } else {
       return 0;
@@ -998,7 +998,7 @@ function borderColor(cur, colorDegree) {
 
 function findCur(d) {
   var cur = currentCurrency;
-  if(cur != "XRP") {
+  if(cur != "STR") {
     if(!d.balances[cur]){cur="__Z";}
     else if(d.balances[cur]<0){cur="__N";}
     else if(!COLOR_TABLE.hasOwnProperty(cur)) {cur = "___";}
@@ -1210,7 +1210,7 @@ function animateTransaction(tx) {
     initialCur = tx.SendMax.currency;
     if(!HIGH_SATURATION_COLORS.hasOwnProperty(initialCur)) {initialCur = "___";}
   } else {
-    initialCur = "XRP";
+    initialCur = "STR";
   } 
   shine(true, tx.Account, initialCur);
   
@@ -1218,7 +1218,7 @@ function animateTransaction(tx) {
     finalCur = amount.currency;
     if(!HIGH_SATURATION_COLORS.hasOwnProperty(finalCur)) {finalCur = "___";}
   } else {
-    finalCur = "XRP";
+    finalCur = "STR";
   } 
   
   if (tx.Paths) {
@@ -1262,7 +1262,7 @@ function animateTransaction(tx) {
           cur = path[j].currency;
           if(!HIGH_SATURATION_COLORS.hasOwnProperty(cur)) {cur = "___";}
         } else {
-          cur = "XRP";
+          cur = "STR";
         }
         
         animateLink(onOrOff, speed, lastNode, nextNode, cur, function(){shine(onOrOff, nextNode, cur); animatePathLink(j+1)});
@@ -1485,10 +1485,10 @@ function updateInformation(address) {
   $('#balanceTable').append(
     '<tr class="toprow">'+
       '<td class="circlecell"><svg width="22" height="22">'+
-        '<circle cx="11" cy="11" r="11" style="fill:'+COLOR_TABLE['XRP'][0][1]+';"></circle>'+
+        '<circle cx="11" cy="11" r="11" style="fill:'+COLOR_TABLE['STR'][0][1]+';"></circle>'+
       '</svg></td>'+
-      '<td class="light small mediumgray" style="width:35px;">XRP</td>'+
-      '<td class="bold amount" id="xrpBalance">'+commas(nodes[nodeMap[address]].account.Balance/1000000)+'</td>'+
+      '<td class="light small mediumgray" style="width:35px;">STR</td>'+
+      '<td class="bold amount" id="strBalance">'+commas(nodes[nodeMap[address]].account.Balance/1000000)+'</td>'+
       '<td class="light expander">&nbsp;</td>'+
     '</tr>');
  
@@ -1646,13 +1646,13 @@ function updateTransactions(address, appending) {
                 type = mn.LedgerEntryType;
                 if (type == "AccountRoot") {
                   diff = LatestFields.Balance - (mn.PreviousFields ? mn.PreviousFields.Balance : 0);
-                  if (affectedBalances["XRP"]) {
-                    affectedBalances["XRP"]+=diff;
+                  if (affectedBalances["STR"]) {
+                    affectedBalances["STR"]+=diff;
                   } else {
-                    affectedBalances["XRP"]=diff;
+                    affectedBalances["STR"]=diff;
                   }
-                } else if (type == "RippleState") {
-                  //console.log("Affected RippleState:", mn);
+                } else if (type == "StellarState") {
+                  //console.log("Affected StellarState:", mn);
                   //Not sure why this is reversed, but that's the way it is:
                   diff = 0-(LatestFields.Balance.value - (mn.PreviousFields ? mn.PreviousFields.Balance.value : 0));
                   cur = LatestFields.Balance.currency;
@@ -1686,8 +1686,8 @@ function updateTransactions(address, appending) {
               continue; 
             } else {
               transactionType = "offerin";
-              amount = affectedKeys[posKey]=="XRP" ? positive : {value: positive, currency: affectedKeys[posKey]};
-              secondAmount = affectedKeys[negKey]=="XRP" ? -negative : {value: -negative, currency: affectedKeys[negKey]};
+              amount = affectedKeys[posKey]=="STR" ? positive : {value: positive, currency: affectedKeys[posKey]};
+              secondAmount = affectedKeys[negKey]=="STR" ? -negative : {value: -negative, currency: affectedKeys[negKey]};
             }
           } else {
             console.log("Could not interpret as offerin.", affectedBalances);
@@ -1706,7 +1706,7 @@ function updateTransactions(address, appending) {
           aissuer = amount.currency.split(":")[1];
           amount = amount.value;
         } else {
-          currency = "XRP";
+          currency = "STR";
           amount = amount/1000000;
         }
       }
@@ -1717,7 +1717,7 @@ function updateTransactions(address, appending) {
           secondAissuer = secondAmount.currency.split(":")[1];
           secondAmount = secondAmount.value;
         } else {
-          secondCurrency = "XRP";
+          secondCurrency = "STR";
           secondAmount = secondAmount/1000000;
         }
       }
@@ -1887,7 +1887,7 @@ function getBalances(address) {
 }
 
 function linkOrNot(d) {
-  if(currentCurrency=="XRP" || currentCurrency==d.currency) {
+  if(currentCurrency=="STR" || currentCurrency==d.currency) {
     var o = 5*Math.pow(Math.log(1+d.value),0.3333);
     return o;
   } 
@@ -1895,7 +1895,7 @@ function linkOrNot(d) {
 }
 
 function isLinkVisible(d) {
-  return currentCurrency=="XRP" || currentCurrency==d.currency
+  return currentCurrency=="STR" || currentCurrency==d.currency
 }
 
 function changeCurrency(newCurrency) {

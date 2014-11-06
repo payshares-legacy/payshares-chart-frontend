@@ -31,12 +31,12 @@ function CapChart(options) {
   dropdowns.select(".dataType select").on('change',function(){
     self.dataType = this.value;
     if (self.dataType=='Transaction Volume') {
-      dropdowns.select(".currency").insert("option", ":first-child").attr("class", "XRP").text("XRP");  
+      dropdowns.select(".currency").insert("option", ":first-child").attr("class", "STR").text("STR");  
     } else {
-      dropdowns.select(".currency .XRP").remove();
+      dropdowns.select(".currency .STR").remove();
     }
     
-    if (self.currency=='XRP') self.currency = dropdowns.select(".currency").node().value;
+    if (self.currency=='STR') self.currency = dropdowns.select(".currency").node().value;
 
     var d = controls.select(".interval .selected").datum();
     loadData(d);
@@ -45,8 +45,8 @@ function CapChart(options) {
  
 //add currency dropdown    
   var currencyList = ['BTC','USD','CAD','CNY','EUR','GBP','JPY','ILS','LTC','NZD','XAG','XAU'];
-  if (self.dataType=='Transaction Volume') currencyList.unshift("XRP");
-  var currencyDropdown = ripple.currencyDropdown(currencyList).selected({currency:self.currency})
+  if (self.dataType=='Transaction Volume') currencyList.unshift("STR");
+  var currencyDropdown = stellar.currencyDropdown(currencyList).selected({currency:self.currency})
     .on("change", function(currency) {
       self.currency = currency;
       var range = controls.select(".interval .selected").datum();
@@ -191,7 +191,7 @@ function CapChart(options) {
       return;  
     } 
 
-    var issuers = self.currency=="XRP" ? [{currency:"XRP"}] : currencyDropdown.getIssuers(self.currency);    
+    var issuers = self.currency=="STR" ? [{currency:"STR"}] : currencyDropdown.getIssuers(self.currency);    
     for (var i=0; i<issuers.length; i++) {
       loadSendDataHelper(range, issuers[i], issuers.length);
     }       
@@ -276,7 +276,7 @@ function CapChart(options) {
       timeIncrement : range.interval,
       descending    : false,
       base          : base,
-      counter       : {currency:"XRP"}
+      counter       : {currency:"STR"}
       
     }, function(data){  
       if (!tradeDataCache[currency]) 
@@ -668,7 +668,7 @@ function CapChart(options) {
     else if (self.dataType=='Trade Volume')   
       data = tradeDataCache[self.currency][self.range].legend;      
     
-    legend.style("display", self.currency == 'XRP' ? "none" : "block");     
+    legend.style("display", self.currency == 'STR' ? "none" : "block");     
     var items = legend.selectAll(".item").data(data);
     var enter = items.enter().append("div").attr("class","item");
 

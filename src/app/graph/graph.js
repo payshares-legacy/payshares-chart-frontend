@@ -1,4 +1,4 @@
-angular.module( 'ripplecharts.graph', [
+angular.module( 'stellarcharts.graph', [
   'ui.state',
   'ui.bootstrap'
 ])

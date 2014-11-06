@@ -1,15 +1,15 @@
 
 angular.element(document).ready(function() {
-  angular.module( 'ripplecharts', [
+  angular.module( 'stellarcharts', [
     'templates-app',
     'templates-common',
-    'ripplecharts.landing',
-    'ripplecharts.markets',
-    'ripplecharts.multimarkets',
-    'ripplecharts.activeAccounts',
-    'ripplecharts.graph',
-    'ripplecharts.accounts',
-    'ripplecharts.value',
+    'stellarcharts.landing',
+    'stellarcharts.markets',
+    'stellarcharts.multimarkets',
+    'stellarcharts.activeAccounts',
+    'stellarcharts.graph',
+    'stellarcharts.accounts',
+    'stellarcharts.value',
     'ui.state',
     'ui.route',
     'snap'
@@ -52,13 +52,13 @@ angular.element(document).ready(function() {
       mixpanel.track("Page", {"Page Name":toState.name, "Theme":$scope.theme});
       
       if ( angular.isDefined( toState.data.pageTitle ) ) 
-           $scope.pageTitle = toState.data.pageTitle + ' | Ripple Charts' ;
-      else $scope.pageTitle = "Ripple Charts"
+           $scope.pageTitle = toState.data.pageTitle + ' | Stellar Charts' ;
+      else $scope.pageTitle = "Stellar Charts"
       
     });
     
-  //connect to the ripple network;
-    remote = new ripple.Remote(Options.ripple);
+  //connect to the stellar network;
+    remote = new stellar.Remote(Options.stellar);
     remote.connect();  
       
   //get ledger number and total coins  
@@ -105,12 +105,12 @@ angular.element(document).ready(function() {
   d3.json("assets/gateways.json", function(error, data) {
     gateways = data;
 
-    //2nd connection needed for now because of a bug in ripple-lib 
+    //2nd connection needed for now because of a bug in stellar-lib 
     //when unsubscribing from an orderbook.
-    orderBookRemote = new ripple.Remote(Options.ripple);
+    orderBookRemote = new stellar.Remote(Options.stellar);
     orderBookRemote.connect();
         
-    angular.bootstrap(document, ['ripplecharts']);
+    angular.bootstrap(document, ['stellarcharts']);
 
 /*
     api = new ApiHandler("http://localhost:5993/api");

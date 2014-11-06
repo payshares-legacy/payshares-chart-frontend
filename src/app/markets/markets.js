@@ -1,4 +1,4 @@
-angular.module( 'ripplecharts.markets', [
+angular.module( 'stellarcharts.markets', [
   'ui.state',
   'ui.bootstrap',
   'ui.route'
@@ -46,7 +46,7 @@ angular.module( 'ripplecharts.markets', [
   
 //load settings from session, local storage, options, or defaults  
   $scope.base  = store.session.get('base') || store.get('base') || 
-    Options.base || {currency:"XRP", issuer:""};
+    Options.base || {currency:"STR", issuer:""};
   
   $scope.trade = store.session.get('trade') || store.get('trade') || 
     Options.trade || {currency:"USD", issuer:"rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B"};
@@ -59,13 +59,13 @@ angular.module( 'ripplecharts.markets', [
 
 //set up the currency pair dropdowns
   var loaded  = false, 
-    dropdownB = ripple.currencyDropdown().selected($scope.trade)
+    dropdownB = stellar.currencyDropdown().selected($scope.trade)
       .on("change", function(d) {
         if (loaded) {
           $scope.trade = d;
           loadPair();
         }}),
-    dropdownA = ripple.currencyDropdown().selected($scope.base)
+    dropdownA = stellar.currencyDropdown().selected($scope.base)
       .on("change", function(d) {
         if (loaded) {
           $scope.base = d;

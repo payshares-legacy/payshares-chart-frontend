@@ -1,4 +1,4 @@
-angular.module( 'ripplecharts.activeAccounts', [
+angular.module( 'stellarcharts.activeAccounts', [
   'ui.state',
   'ui.bootstrap'
 ])
@@ -18,8 +18,8 @@ angular.module( 'ripplecharts.activeAccounts', [
 
 .controller( 'ActiveAccountsCtrl', function ActiveAccountsCtrl( $scope ) {
 
-  var base    = store.session.get('traderBase')    || store.get('traderBase')    || {"currency": "USD", "issuer" : "rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B"};
-  var counter = store.session.get('traderCounter') || store.get('traderCounter') || {"currency": "XRP"};
+  var base    = store.session.get('traderBase')    || store.get('traderBase')    || {"currency": "USD", "issuer" : "gDSSa75HPagWcvQmwH7D51dT5DPmvsKL4q"};
+  var counter = store.session.get('traderCounter') || store.get('traderCounter') || {"currency": "STR"};
   var period  = store.session.get('traderPeriod')  || store.get('traderPeriod')  || "24h";
   var metric  = store.session.get('traderMetric')  || store.get('traderMetric')  || "volume";
    
@@ -33,13 +33,13 @@ angular.module( 'ripplecharts.activeAccounts', [
 
 //set up the currency pair dropdowns
   var loaded  = false, 
-    dropdownB = ripple.currencyDropdown().selected(counter)
+    dropdownB = stellar.currencyDropdown().selected(counter)
       .on("change", function(d) {
         if (loaded) {
           counter = d;
           loadPair();
         }}),
-    dropdownA = ripple.currencyDropdown().selected(base)
+    dropdownA = stellar.currencyDropdown().selected(base)
       .on("change", function(d) {
         if (loaded) {
           base = d;

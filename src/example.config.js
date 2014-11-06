@@ -10,14 +10,13 @@ Options = {
   chartType : "line",
   interval  : "1h",
  
-  ripple    : {
+  stellar    : {
     
     trace   : false,
     trusted : false,
 
     servers: [
-      { host: 's-west.ripple.com', port: 443, secure: true },
-      { host: 's-east.ripple.com', port: 443, secure: true }
+      { host: 'live.stellar.org', port: 9001, secure: true }
     ],
 
     connection_offset: 0

@@ -106,7 +106,7 @@ var TradeFeed = function (options) {
       .data(transactions);
       
     var rowEnter = rows.enter().append("tr");
-    var baseCurrency = ripple.Currency.from_json(self.base.currency).to_human();
+    var baseCurrency = stellar.Currency.from_json(self.base.currency).to_human();
     rowEnter.append("td").attr("class","type");
     rowEnter.append("td").attr("class","amount");
     rowEnter.append("td").attr("class","time");
@@ -123,7 +123,7 @@ var TradeFeed = function (options) {
 //make values human readable  
   function valueFilter (d, currency) {
     if (!d) return "&nbsp";
-    var value = ripple.Amount.from_human(d + " " + currency).to_human(numberFormat);
+    var value = stellar.Amount.from_human(d + " " + currency).to_human(numberFormat);
     if (!value) return "> 0.000001"; //must match min_precision variable
     return value;      
   }
@@ -162,8 +162,8 @@ var TradeFeed = function (options) {
 
 //display 24 hour stats from the known values
   function updateDailyStats () {
-    var base    = ripple.Currency.from_json(self.base.currency).to_human();
-    var counter = ripple.Currency.from_json(self.counter.currency).to_human();
+    var base    = stellar.Currency.from_json(self.base.currency).to_human();
+    var counter = stellar.Currency.from_json(self.counter.currency).to_human();
     daily.select(".high").html("<small>H:</small> "+valueFilter(high, self.counter.currency));
     daily.select(".low").html("<small>L:</small> "+valueFilter(low, self.counter.currency));
     daily.select(".volume").html("<small>VOL:</small> "+valueFilter(volume, self.base.currency)+"<small>"+base+"</small>");

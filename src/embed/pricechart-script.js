@@ -7,7 +7,7 @@
  *  id        : id of element that will contain the chart. if not specified, the chart will be appended the body
  *  bodyTheme : true/false - setting true will apply the chart theme to the entire document, defaults to false
  *  customCSS : true/false - disables the default styling
- *  apiURL    : custom url for the API backend, defaults to ripplecharts.com API
+ *  apiURL    : custom url for the API backend, defaults to stellarcharts.com API
  *  width     : width of chart
  *  height    : height of chart
  *  margin    : e.g. "{top:50,bottom:50,left:50,right:50}" - axis labels are drawn in the margin
