@@ -5,19 +5,18 @@
 
 Options = {
   theme     : "light",
-  base      : {currency:"BTC", issuer:"rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B"},
-  trade     : {currency:"XRP", issuer:""},
+  base      : {currency:"BTC", issuer:"gDSSa75HPagWcvQmwH7D51dT5DPmvsKL4q"},
+  trade     : {currency:"STR", issuer:""},
   chartType : "line",
   interval  : "1h",
  
-  ripple    : {
+  stellar    : {
     
     trace   : false,
     trusted : false,
 
     servers: [
-      { host: 's-west.ripple.com', port: 443, secure: true },
-      { host: 's-east.ripple.com', port: 443, secure: true }
+      { host: 'live.stellar.org', port: 9001, secure: true }
     ],
 
     connection_offset: 0

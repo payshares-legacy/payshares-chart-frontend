@@ -5,7 +5,7 @@
     gatewayByAddress,
     queue = [];
 
-  ripple.currencyDropdown = function(currencyList) {
+  stellar.currencyDropdown = function(currencyList) {
     var event = d3.dispatch("change"), selected;
 	
     if (!accountsByCurrency) {
@@ -40,7 +40,7 @@
 
 //  this function is called to display currency then issuer    
     function loadDropdowns(selection) {
-      var currencies       = currencyList || ["XRP"].concat(d3.keys(accountsByCurrency).sort());
+      var currencies       = currencyList || ["STR"].concat(d3.keys(accountsByCurrency).sort());
       var currencySelect   = selection.append("select").attr("class","currency").on("change", changeCurrency);
       var gateway          = selected && gatewayByAddress[selected.issuer];
       var selectedCurrency = selected ? selected.currency : null;
@@ -73,7 +73,7 @@
           event.change(currencySelect.node().value);  
         } else {
           var currency = currencySelect.node().value;
-          var list = currency == 'XRP' ? [""] : 
+          var list = currency == 'STR' ? [""] : 
             accountsByCurrency[currency].map(function(d){
               return d.gateway.name;
             });
@@ -82,7 +82,7 @@
           
           option.enter().append("option").text(function(d){return d});
           option.exit().remove();
-          if (currency=="XRP") gatewaySelect.attr("disabled", "true");
+          if (currency=="STR") gatewaySelect.attr("disabled", "true");
           else gatewaySelect.attr('disabled', null);
          
           
@@ -120,13 +120,13 @@
 //  issuer-currency instead of currency - issuer    
     function loaded(selection) {
       //loadDropdowns(selection);
-      var currencies = ["XRP"].concat(d3.keys(accountsByCurrency).sort()),
+      var currencies = ["STR"].concat(d3.keys(accountsByCurrency).sort()),
         names        = [""].concat(d3.keys(gatewayByName).sort()),
         gateway      = selected && gatewayByAddress[selected.issuer];
 			
       var gatewaySelect = selection.append("select").attr("class","gateway").on("change", function() {
         var gateway = gatewayByName[gatewaySelect.selectAll(":checked").datum()],
-	       option     = currencySelect.selectAll("option").data(gateway ? gateway.currencies : ["XRP"], String);
+	       option     = currencySelect.selectAll("option").data(gateway ? gateway.currencies : ["STR"], String);
 	              	
         option.enter().append("option").text(String);
         option.exit().remove();
@@ -142,7 +142,7 @@
       var currencySelect = selection.append("select").attr("class","currency").on("change", change);
       
       var option = currencySelect.selectAll("option")
-        .data(gateway ? gateway.currencies : ["XRP"], String)
+        .data(gateway ? gateway.currencies : ["STR"], String)
         .enter().append("option")
         .text(String);
         	

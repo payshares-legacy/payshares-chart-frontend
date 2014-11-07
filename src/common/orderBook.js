@@ -76,8 +76,8 @@ var OrderBook = function (options) {
     options.trade   = trade;
     lineData        = [];
     self.offers     = {};
-    baseCurrency    = ripple.Currency.from_json(base.currency).to_human();
-    counterCurrency = ripple.Currency.from_json(trade.currency).to_human();
+    baseCurrency    = stellar.Currency.from_json(base.currency).to_human();
+    counterCurrency = stellar.Currency.from_json(trade.currency).to_human();
     
     bookTables.transition().style("opacity", 0.5);
     fadeChart();
@@ -120,7 +120,7 @@ var OrderBook = function (options) {
   }
 
 
-//handle data returned from ripple-lib
+//handle data returned from stellar-lib
   function handleBook (data,action) {
     var max_rows = options.max_rows || 100,
       rowCount   = 0,
@@ -236,7 +236,7 @@ var OrderBook = function (options) {
   }
 
 
-//draw the chart data loaded from ripple-lib  
+//draw the chart data loaded from stellar-lib  
   function drawData () {
     if (!self.offers.bids || !self.offers.asks) return; //wait for both to load
     if (!self.offers.bids.length || !self.offers.asks.length) {

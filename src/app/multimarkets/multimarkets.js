@@ -1,4 +1,4 @@
-angular.module( 'ripplecharts.multimarkets', [
+angular.module( 'stellarcharts.multimarkets', [
   'ui.state',
   'ui.bootstrap'
 ])
@@ -21,14 +21,14 @@ angular.module( 'ripplecharts.multimarkets', [
     store.get('multimarkets') || 
     Options.multimarkets || [
     {
-      base    : {currency:"XRP"},
-      counter : {currency:"USD",issuer:"rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B"}},
+      base    : {currency:"STR"},
+      counter : {currency:"USD",issuer:"gDSSa75HPagWcvQmwH7D51dT5DPmvsKL4q"}},
     {
-      base    : {currency:"XRP"},
+      base    : {currency:"STR"},
       counter : {currency:"CNY",issuer:"rnuF96W4SZoCJmbHYBFoJZpR8eCaxNvekK"}},
     {
-      base    : {currency:"BTC",issuer:"rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B"},
-      counter : {currency:"XRP"}}
+      base    : {currency:"BTC",issuer:"gDSSa75HPagWcvQmwH7D51dT5DPmvsKL4q"},
+      counter : {currency:"STR"}}
     ];
     
     

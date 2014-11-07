@@ -21,8 +21,8 @@ var MiniChart = function(base, counter, markets) {
   var width  = parseInt(self.div.style('width'), 10) - margin.left - margin.right;
   var height = width/2>150 ? width/2 : 150;
   
-  var baseCurrency    = base    ? ripple.Currency.from_json(base.currency).to_human()    : "XRP";
-  var counterCurrency = counter ? ripple.Currency.from_json(counter.currency).to_human() : "XRP";
+  var baseCurrency    = base    ? stellar.Currency.from_json(base.currency).to_human()    : "STR";
+  var counterCurrency = counter ? stellar.Currency.from_json(counter.currency).to_human() : "STR";
   
   if (markets.options.fixed) {
     header = self.div.append("div").attr("class","chartHeader");
@@ -47,13 +47,13 @@ var MiniChart = function(base, counter, markets) {
     .attr("src", "assets/images/rippleThrobber.png");
     
     
-  dropdownA = ripple.currencyDropdown().selected(base);
+  dropdownA = stellar.currencyDropdown().selected(base);
   dropdownA.on("change", function(d) {
       self.base = d;
       if (!flipping && loaded) self.load();
       });
          
-  dropdownB = ripple.currencyDropdown().selected(counter);
+  dropdownB = stellar.currencyDropdown().selected(counter);
   dropdownB.on("change", function(d) {
       self.counter = d;
       if (loaded) self.load();
@@ -102,12 +102,12 @@ var MiniChart = function(base, counter, markets) {
   
 //load the chart data from the API       
   function load (update) {
-    baseCurrency   = ripple.Currency.from_json(self.base.currency).to_human();
-    counterCounter = ripple.Currency.from_json(self.counter.currency).to_human();
+    baseCurrency   = stellar.Currency.from_json(self.base.currency).to_human();
+    counterCounter = stellar.Currency.from_json(self.counter.currency).to_human();
     markets.updateListHandler();
     if (!self.base || !self.counter ||
       (self.base.currency == self.counter.currency &&
-      self.counter.currency == "XRP")) return setStatus("Select a currency pair."); 
+      self.counter.currency == "STR")) return setStatus("Select a currency pair."); 
 
     if (!update) {
       setStatus("");
@@ -376,7 +376,7 @@ var MiniChart = function(base, counter, markets) {
           max_sig_digits : 7
       }
   
-    return ripple.Amount.from_human(d).to_human(opts);     
+    return stellar.Amount.from_human(d).to_human(opts);     
   }
 }
 
@@ -442,8 +442,8 @@ var MultiMarket = function (options) {
       var data = [];
       for (var i=0; i<self.charts.length; i++) {
         if (!self.charts[i].base) continue;
-        else if (self.charts[i].base.currency=='XRP' &&
-          self.charts[i].counter.currency=='XRP') continue;
+        else if (self.charts[i].base.currency=='STR' &&
+          self.charts[i].counter.currency=='STR') continue;
         data.push({
           base    : self.charts[i].base,
           counter : self.charts[i].counter

@@ -1,4 +1,4 @@
-angular.module( 'ripplecharts.accounts', [
+angular.module( 'stellarcharts.accounts', [
   'ui.state',
   'ui.bootstrap'
 ])

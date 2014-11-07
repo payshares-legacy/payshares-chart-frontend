@@ -21,18 +21,18 @@ var ValueSummary = function (options) {
     .append("g")
     .attr("transform", "translate(" + (radius+margin.left) + "," + (radius+margin.top) + ")");
 
-  var toggle = outer.append("label").attr("class","xrpToggle");
-  var hideXRP = true;
+  var toggle = outer.append("label").attr("class","strToggle");
+  var hideSTR = true;
     
     toggle.append("input").attr("type", "checkbox")
-      .property("checked", !hideXRP)
+      .property("checked", !hideSTR)
       .on('click', function(){
-        hideXRP = !d3.select(this).property("checked");
+        hideSTR = !d3.select(this).property("checked");
         self.load(null, exchange, true);
       });
       
     toggle.append("b");  
-    toggle.append("span").html("include XRP");  
+    toggle.append("span").html("include STR");  
      
   //var color  = d3.scale.category20();
   var color = function (d) {
@@ -44,7 +44,7 @@ var ValueSummary = function (options) {
     }
     
     var colors = {
-      'XRP'     : '#346aa9',
+      'STR'     : '#346aa9',
       'USD'     : [20,150,30],
       'BTC'     : [240,150,50],
       'EUR'     : [220,210,50],
@@ -78,12 +78,12 @@ var ValueSummary = function (options) {
   var path          = chart.selectAll("path");    
   var tooltip       = outer.append("div").attr("class","tooltip"); 
   var transitioning = false;
-  var gateways      = ripple.currencyDropdown();
+  var gateways      = stellar.currencyDropdown();
   var exchange, current, total;
   var data = [];
    
   //load a specific metric
-  this.load = function (z, ex, xrpToggle) {
+  this.load = function (z, ex, strToggle) {
     
     if (z && z.components) {
       total = z.total || 0;
@@ -104,37 +104,37 @@ var ValueSummary = function (options) {
     transitioning = true;
     exchange      = ex;
         
-    //check for XRP, set the percentages
-    var XRPObj, currencies = {};
+    //check for STR, set the percentages
+    var STRObj, currencies = {};
     data.forEach(function(d) {
-      if (d.currency=='XRP') XRPObj = d;   
+      if (d.currency=='STR') STRObj = d;   
       
       d.percent = total ? d.convertedAmount/total*100 : 0.00;
     });
     
-    //XRP wont be present for trade volume, so add it at 0
-    if (!XRPObj) data.push({currency:'XRP', convertedAmount:0.0});     
+    //STR wont be present for trade volume, so add it at 0
+    if (!STRObj) data.push({currency:'STR', convertedAmount:0.0});     
     
-    //if the XRP toggle is active and XRP should be hidden
-    //adjust the total, set the XRP amount to 0, and
+    //if the STR toggle is active and STR should be hidden
+    //adjust the total, set the STR amount to 0, and
     //recalculate the percentages
-    else if (xrpToggle && hideXRP) {
-      var adjusted = total - XRPObj.amount;
+    else if (strToggle && hideSTR) {
+      var adjusted = total - STRObj.amount;
       data.forEach(function(d){
-        if (d.currency=='XRP') d.convertedAmount = 0;  
+        if (d.currency=='STR') d.convertedAmount = 0;  
         d.percent = adjusted ? d.convertedAmount/adjusted*100 : 0.00;        
       });
 
     //otherwise, reset the converted amount and set percentage
     } else {
-      XRPObj.convertedAmount = XRPObj.amount || 0.0;
-      XRPObj.percent = total ? XRPObj.amount/total*100 : 0.00;
+      STRObj.convertedAmount = STRObj.amount || 0.0;
+      STRObj.percent = total ? STRObj.amount/total*100 : 0.00;
     }
     
     //sort by issuer, reversed
     data.sort(function(a, b){
-      var i1 = a.base ? a.base.currency+a.base.issuer : a.currency+a.issuer || "Z"; //make XRP first
-      var i2 = b.base ? b.base.currency+b.base.issuer : b.currency+b.issuer || "Z"; //make XRP first
+      var i1 = a.base ? a.base.currency+a.base.issuer : a.currency+a.issuer || "Z"; //make STR first
+      var i2 = b.base ? b.base.currency+b.base.issuer : b.currency+b.issuer || "Z"; //make STR first
       return i2 ? i2.localeCompare(i1) : 0;
     });
     
@@ -228,7 +228,7 @@ var ValueSummary = function (options) {
       
     label.exit().remove();
    
-    toggle.style("display", xrpToggle ? "block" : "none"); 
+    toggle.style("display", strToggle ? "block" : "none"); 
   }
   
   

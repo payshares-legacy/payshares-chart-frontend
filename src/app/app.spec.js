@@ -4,23 +4,23 @@ describe( 'AppCtrl', function() {
     expect (Options).not.toBeUndefined();
   })); 
   
-  it ( 'should have Options.ripple defined', inject( function(){
-    expect (Options.ripple).not.toBeUndefined();
+  it ( 'should have Options.stellar defined', inject( function(){
+    expect (Options.stellar).not.toBeUndefined();
   })); 
   
-  it ( 'should have Options.ripple.servers defined', inject( function(){
-    expect (Options.ripple.servers).not.toBeUndefined();
+  it ( 'should have Options.stellar.servers defined', inject( function(){
+    expect (Options.stellar.servers).not.toBeUndefined();
   })); 
 
-  it ( 'should have Options.ripple.servers defined', inject( function(){
-    expect (Options.ripple.servers[0].host).not.toBeUndefined();
+  it ( 'should have Options.stellar.servers defined', inject( function(){
+    expect (Options.stellar.servers[0].host).not.toBeUndefined();
   }));
 
         
   describe( 'isCurrentUrl', function() {
     var AppCtrl, $location, $scope;
   
-    beforeEach( module( 'ripplecharts' ) );
+    beforeEach( module( 'stellarcharts' ) );
 
     beforeEach( inject( function( $controller, _$location_, $rootScope ) {
       $location = _$location_;
