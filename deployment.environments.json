@@ -1,0 +1,17 @@
+{
+  "development": {
+    "api"         : "http://localhost:5993",
+    "domain"      : "http://localhost",
+    "maintenance" : false
+  },
+  
+  "staging": {
+    "api"         : "https://data-stg.stellar.org",
+    "domain"      : "https://charts-stg.stellar.org"
+  },
+  
+  "production": {
+    "api"         : "https://data.stellar.org",
+    "domain"      : "https://charts.stellar.org"
+  }
+}
