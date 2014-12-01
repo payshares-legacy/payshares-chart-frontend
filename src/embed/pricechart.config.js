@@ -9,8 +9,8 @@ module.exports = {
     loader: 'src/assets/images/rippleThrobber.png',
     
     js: [  
-      'vendor/moment/moment.js',
-      'vendor/d3/d3.js',
+      'bower_components/moment/moment.js',
+      'bower_components/d3/d3.js',
       'deps/stellar-lib.js',
       'src/common/apiHandler.js',
       'src/common/priceChart.js',
