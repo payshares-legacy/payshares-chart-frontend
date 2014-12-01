@@ -18,8 +18,6 @@ module.exports = function ( grunt ) {
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-ngmin');
   grunt.loadNpmTasks('grunt-html2js');
-  grunt.loadNpmTasks('grunt-aws');
-  grunt.loadNpmTasks('grunt-cloudflare');
 
   /**
    * Load in our build configuration file.
@@ -36,33 +34,6 @@ module.exports = function ( grunt ) {
    * instructions.
    */
   var taskConfig = {
-
-    aws:{
-      accessKeyId: deploymentConfig.aws.accessKeyId,
-      secretAccessKey: deploymentConfig.aws.secretAccessKey
-    },
-    s3: {
-      options: {
-        accessKeyId: deploymentConfig.aws.accessKeyId,
-        secretAccessKey: deploymentConfig.aws.secretAccessKey,
-        bucket: deploymentConfig.s3.bucket,
-        enableWeb: deploymentConfig.s3.enableWeb
-      },
-      build: {
-        cwd: "bin/",
-        src: "**"
-      }
-    },
-    cloudflare: {
-      options: {
-        /* purge the cache */
-        a: 'fpurge_ts',
-        tkn: deploymentConfig.cloudflare.api_key,
-        email: deploymentConfig.cloudflare.email,
-        z: deploymentConfig.cloudflare.domain
-      }
-    },
-
     /**
      * We read in our `package.json` file so we can access the package name and
      * version. It's already there, so we don't repeat ourselves here.
