@@ -45,13 +45,13 @@ module.exports = {
    */
   test_files: {
     js: [
-      'vendor/angular-mocks/angular-mocks.js'
+      'bower_components/angular-mocks/angular-mocks.js'
     ]
   },
 
   /**
    * This is the same as `app_files`, except it contains patterns that
-   * reference vendor code (`vendor/`) that we need to place into the build
+   * reference vendor code (`bower_components/`) that we need to place into the build
    * process somewhere. While the `app_files` property ensures all
    * standardized files are collected for compilation, it is the user's job
    * to ensure non-standardized (i.e. vendor-related) files are handled
@@ -69,22 +69,22 @@ module.exports = {
    */
   vendor_files: {
     js: [
-      'vendor/snapjs/snap.js',
-      'vendor/angular/angular.js',
-      'vendor/angular-touch/angular-touch.js',
-      'vendor/angular-snap/angular-snap.js',
-      'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
-      'vendor/placeholders/angular-placeholders-0.0.1-SNAPSHOT.min.js',
-      'vendor/angular-ui-router/release/angular-ui-router.js',
-      'vendor/angular-ui-utils/modules/route/route.js',
-      'vendor/underscore/underscore.js',
-      'vendor/moment/moment.js',
-      'vendor/store/dist/store2.js',
-      'vendor/modernizr/modernizr.js',
-      'vendor/d3/d3.js',
-      'vendor/jquery/jquery.js',
-      'vendor/jscrollpane/script/jquery.mousewheel.js',
-      'vendor/jscrollpane/script/jquery.jscrollpane.js',
+      'bower_components/snapjs/snap.js',
+      'bower_components/angular/angular.js',
+      'bower_components/angular-touch/angular-touch.js',
+      'bower_components/angular-snap/angular-snap.js',
+      'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
+      'bower_components/placeholders/angular-placeholders-0.0.1-SNAPSHOT.min.js',
+      'bower_components/angular-ui-router/release/angular-ui-router.js',
+      'bower_components/angular-ui-utils/modules/route/route.js',
+      'bower_components/underscore/underscore.js',
+      'bower_components/moment/moment.js',
+      'bower_components/store/dist/store2.js',
+      'bower_components/modernizr/modernizr.js',
+      'bower_components/d3/d3.js',
+      'bower_components/jquery/jquery.js',
+      'bower_components/jscrollpane/script/jquery.mousewheel.js',
+      'bower_components/jscrollpane/script/jquery.jscrollpane.js',
       'deps/jquery.selectbox.min.js',
       'deps/jquery.inview.js',
       'deps/stellar-lib.js',
@@ -92,15 +92,15 @@ module.exports = {
       'deps/onResize.js'
     ],
     css: [
-      'vendor/angular-snap/angular-snap.css',
-      'vendor/snapjs/snap.css',
-      'vendor/jscrollpane/style/jquery.jscrollpane.css'
+      'bower_components/angular-snap/angular-snap.css',
+      'bower_components/snapjs/snap.css',
+      'bower_components/jscrollpane/style/jquery.jscrollpane.css'
     ],
     assets: [
     ],
     
     fonts: [
-      'vendor/bootstrap/dist/fonts/*'
+      'bower_components/bootstrap/dist/fonts/*'
     ]
   },
 };
