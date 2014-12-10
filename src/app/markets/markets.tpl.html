@@ -9,7 +9,7 @@
       </p>
       <p>  
         The large number at the top is the latest trade price.
-        Currency prices are always quoted in relation to one another, e.g. XRP/USD.    
+        Currency prices are always quoted in relation to one another, e.g. STR/USD.    
         The first currency in the pair is called the "base currency".  
         The second one is called the "counter currency". The price quote shows 
         the value of 1 unit of base currency in terms of the counter currency.          
@@ -37,25 +37,25 @@
         Select the currency first, and the issuer dropdown will update to show 
         which issuers are available for the selected currency. On the right side,
         the current ledger number is represented, followed by a circle which
-        indicates whether or not Ripple Charts is currently connected to the 
-        Ripple Network real time feed.       
+        indicates whether or not Stellar Charts is currently connected to the 
+        Stellar Network real time feed.       
       </p>
          <table>
           <tr>
-            <td class="rippleStatus">
+            <td class="stellarStatus">
               <svg height="20" width="20" class="connected">
                 <circle cx="10" cy="10" r="5" fill="#c00" />
               </svg>
             </td>
-            <th>Connected to the Ripple Network</th>
+            <th>Connected to the Stellar Network</th>
           </tr>
           <tr>
-            <td class="rippleStatus">
+            <td class="stellarStatus">
               <svg height="20" width="20">
                 <circle cx="10" cy="10" r="5" fill="#c00" />
               </svg>
             </td>
-            <th>Disconnected from the Ripple Network</th>
+            <th>Disconnected from the Stellar Network</th>
           </tr>
         </table>     
       <p>
@@ -74,7 +74,7 @@
     </div> 
     <div class="controls"> 
       <div id="currencyPair">
-        <div class="rippleStatus">
+        <div class="stellarStatus">
           <div class="items">
             <div class="label" ng-bind="ledgerLabel"></div>
             <div class="index" ng-bind="ledgerIndex">--</div>
@@ -102,7 +102,7 @@
       <h5>Order Book</h5>
       <p>
         The current order book for the selected currency pair is below - 
-        these are orders across the Ripple Network that have been placed
+        these are orders across the Stellar Network that have been placed
         but not yet filled. "Bids" are orders to buy the base currency, and 
         "Asks" are orders to sell the base currency. The “Total” column shows 
         the total amount of currency anyone can get at that price. The "Size"

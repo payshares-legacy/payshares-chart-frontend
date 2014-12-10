@@ -44,7 +44,7 @@ var MiniChart = function(base, counter, markets) {
              
   loader = self.div.append("img")
     .attr("class", "loader")
-    .attr("src", "assets/images/rippleThrobber.png");
+    .attr("src", "assets/images/stellarThrobber.png");
     
     
   dropdownA = stellar.currencyDropdown().selected(base);

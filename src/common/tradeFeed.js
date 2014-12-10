@@ -30,7 +30,7 @@ var TradeFeed = function (options) {
   var status = tableWrap.append("h4").attr('class','status');
   var loader = tableWrap.append("img")
       .attr("class", "loader")
-      .attr("src", "assets/images/rippleThrobber.png")
+      .attr("src", "assets/images/stellarThrobber.png")
       .style("opacity", 0); 
  
  

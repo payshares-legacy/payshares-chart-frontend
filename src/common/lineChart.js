@@ -50,7 +50,7 @@ var LineChart = function (options){
   
     loader = div.append("img")
       .attr("class", "loader")
-      .attr("src", "assets/images/rippleThrobber.png");
+      .attr("src", "assets/images/stellarThrobber.png");
     
     if (!self.loading) loader.style("opacity",0);
   }	

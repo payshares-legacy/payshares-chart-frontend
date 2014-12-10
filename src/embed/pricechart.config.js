@@ -6,7 +6,7 @@ module.exports = {
   files: {
 
     html: "src/embed/pricechart.html",
-    loader: 'src/assets/images/rippleThrobber.png',
+    loader: 'src/assets/images/stellarThrobber.png',
     
     js: [  
       'bower_components/moment/moment.js',

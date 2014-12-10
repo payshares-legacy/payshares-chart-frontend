@@ -1,17 +1,17 @@
 <div>
   <div class="main container landing">
     <div class="helpbox" ng-class="{showHelp : showHelp}">
-      <h3>Welcome to Ripple Charts</h3>
+      <h3>Welcome to Stellar Charts</h3>
       <p>
-        This charting site was built by Ripple Labs to provide live and historical data about 
-        the Ripple network. This site is open for anyone to use, alter and embed.  The source
-        code is available <a href="https://github.com/ripple/ripplecharts-frontend" target="_blank">here</a>.
+        This charting site was built by Stellar to provide live and historical data about 
+        the Stellar network. This site is open for anyone to use, alter and embed.  The source
+        code is available <a href="https://github.com/stellar/stellar-charts-frontend" target="_blank">here</a>.
       </p>
     </div>
     <div class="row">
       <div class="col-md-6 stats">
         <h5>
-          Ripple Network Stats
+          Stellar Network Stats
           <select id="valueCurrency" class="valueCurrencySelect"></select>
           <span class="valueRateDisplay" ng-bind="valueRateDisplay"></span>
         </h5> 
@@ -20,7 +20,7 @@
             <label>Total Network Value:</label>
             <div class="stat">
               <span ng-show="valueRate" ng-bind="totalNetworkValue"></span>
-              <img  ng-hide="totalNetworkValue" src="assets/images/rippleThrobber.png" class="loader"/>
+              <img  ng-hide="totalNetworkValue" src="assets/images/stellarThrobber.png" class="loader"/>
               <span ng-show="totalNetworkValue && totalNetworkValue != ' '" ng-click="metricDetail='totalNetworkValue'" class="details" ng-class="{selected : metricDetail == 'totalNetworkValue' }">
                 Detail
                 <img src="assets/images/triangle.svg"/>
@@ -31,7 +31,7 @@
             <label>24 hr Transaction Volume:</label>
             <div class="stat">
               <span ng-show="valueRate" ng-bind="transactionVolume"></span>
-              <img  ng-hide="transactionVolume" src="assets/images/rippleThrobber.png" class="loader"/>
+              <img  ng-hide="transactionVolume" src="assets/images/stellarThrobber.png" class="loader"/>
               <span ng-show="transactionVolume && transactionVolume != ' '" ng-click="metricDetail='transactionVolume'" class="details" ng-class="{selected : metricDetail == 'transactionVolume' }">
                 Detail
                 <img src="assets/images/triangle.svg"/>
@@ -42,7 +42,7 @@
             <label>24 hr Trade Volume:</label>
             <div class="stat">
               <span ng-show="valueRate" ng-bind="tradeVolume"></span>
-              <img  ng-hide="tradeVolume" src="assets/images/rippleThrobber.png" class="loader"/>
+              <img  ng-hide="tradeVolume" src="assets/images/stellarThrobber.png" class="loader"/>
               <span ng-show="tradeVolume && tradeVolume != ' '" ng-click="metricDetail='tradeVolume'" class="details" ng-class="{selected : metricDetail == 'tradeVolume' }">
                 Detail
                 <img src="assets/images/triangle.svg"/>
@@ -50,25 +50,25 @@
             </div>
           </li>          
           <li>
-            <label>Total XRP:</label>
+            <label>Total STR:</label>
             <div class="stat">
               <span ng-bind="totalCoins"></span>
-              <small ng-show="totalCoins">XRP</small>
-              <img ng-hide="totalCoins" src="assets/images/rippleThrobber.png" class="loader"/>
+              <small ng-show="totalCoins">STR</small>
+              <img ng-hide="totalCoins" src="assets/images/stellarThrobber.png" class="loader"/>
             </div>
           </li>
           <li>
             <label>Ledger #:</label>
             <div class="stat">
               <span ng-bind="ledgerIndex"></span>
-              <img ng-hide="ledgerIndex" src="assets/images/rippleThrobber.png" class="loader"/>
+              <img ng-hide="ledgerIndex" src="assets/images/stellarThrobber.png" class="loader"/>
             </div>
           </li> 
           <li>
-            <label># of Ripple accounts:</label>
+            <label># of Stellar accounts:</label>
             <div class="stat">
               <span ng-bind="totalAccounts"></span>
-              <img ng-hide="totalAccounts" src="assets/images/rippleThrobber.png" class="loader"/>
+              <img ng-hide="totalAccounts" src="assets/images/stellarThrobber.png" class="loader"/>
             </div>
           </li>  
         </ul>

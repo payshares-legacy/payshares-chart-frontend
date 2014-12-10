@@ -25,9 +25,9 @@ angular.module( 'stellarcharts.landing', [
     "USD" : "gs9HHU3pmkKBuvykhNm6xiK1JKrput9i3K",  //bitstamp
     "EUR" : "gnhPFpbYXcYGMkGxfWdQGFfuKEdJoEThVo", //snapswap
     "LTC" : "gnhPFpbYXcYGMkGxfWdQGFfuKEdJoEThVo", //stellar trade japan
-    "XRP" : "gnhPFpbYXcYGMkGxfWdQGFfuKEdJoEThVo", //stellarChina
+    "STR" : "gnhPFpbYXcYGMkGxfWdQGFfuKEdJoEThVo", //stellarChina
     "BTC" : "gnhPFpbYXcYGMkGxfWdQGFfuKEdJoEThVo", //stellarChina
-    "STR" : ""
+    "XRP" : ""
   }
   
   var totalAccounts
@@ -93,7 +93,7 @@ angular.module( 'stellarcharts.landing', [
       counter : {currency:"STR"}
     }, {
       base    : {currency:'STR'},
-      counter : {currency:'XRP', issuer: 'gnhPFpbYXcYGMkGxfWdQGFfuKEdJoEThVo'}
+      counter : {currency:'STR', issuer: 'gnhPFpbYXcYGMkGxfWdQGFfuKEdJoEThVo'}
     }, {
       base    : {currency:"SCT", issuer:"gDSSa75HPagWcvQmwH7D51dT5DPmvsKL4q"},
       counter : {currency:"STR"}

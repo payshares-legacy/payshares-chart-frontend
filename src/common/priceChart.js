@@ -1,6 +1,6 @@
 
 if (typeof LOADER_PNG == 'undefined') 
-      LOADER_PNG = "assets/images/rippleThrobber.png";
+      LOADER_PNG = "assets/images/stellarThrobber.png";
 else  LOADER_PNG = "data:image/png;base64," + LOADER_PNG;
 
 

@@ -226,7 +226,7 @@ var OrderBook = function (options) {
   
     loader = chart.append("img")
       .attr("class", "loader")
-      .attr("src", "assets/images/rippleThrobber.png")
+      .attr("src", "assets/images/stellarThrobber.png")
       .style("opacity", 0); 
       
     if (isLoading) {

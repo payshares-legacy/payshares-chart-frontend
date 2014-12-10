@@ -542,7 +542,7 @@ function CapChart(options) {
     status  = chart.append("div").attr("class", "status");
     loader  = chart.append("img")
       .attr("class", "loader")
-      .attr("src", "assets/images/rippleThrobber.png");
+      .attr("src", "assets/images/stellarThrobber.png");
       
     if (isLoading) loader.style("opacity", 1);   
   }

@@ -4,7 +4,7 @@
         "accounts":
         [{
             "address": "gnhPFpbYXcYGMkGxfWdQGFfuKEdJoEThVo",
-            "currencies": ["BTC", "LTC", "NOK", "EUR", "XRP"]
+            "currencies": ["BTC", "LTC", "NOK", "EUR", "STR"]
         }],
         "hotwallets": []
     },
