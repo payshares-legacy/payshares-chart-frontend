@@ -1,8 +1,8 @@
 {
   "author": "Ripple Labs, Inc.",
-  "name": "ripplecharts",
+  "name": "stellarcharts",
   "version": "0.0.1",
-  "homepage": "http://ripple.com",
+  "homepage": "http://stellar.org",
   "licenses": {
     "type": "ISC",
     "url": ""

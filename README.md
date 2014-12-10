@@ -1,6 +1,6 @@
-# Ripple Charts
+# Stellar Charts
 
-This is the frontend for ripplecharts.com data visualization using angular.js and D3
+This is the frontend for charts.stellar.org data visualization using angular.js and D3
 
 ##Installation Instructions:
 
@@ -13,16 +13,16 @@ This is the frontend for ripplecharts.com data visualization using angular.js an
 
         $ sudo npm install -g grunt-cli
     
-3. Install the Ripple Charts frontend.
+3. Install the Stellar Charts frontend.
     
-        $ git clone https://github.com/ripple/ripplecharts-frontend
-        $ cd ripplecharts-frontend
+        $ git clone https://github.com/stellar/stellar-charts-frontend
+        $ cd stellar-charts-frontend
         $ npm install
         $ bower install
         
 4. Copy 'deployment.environments.json.example' into 'deployment.environments.json'
 5. Copy 'src/example.config.js' into 'src/config.js' and fill in the options as desired. A URL for the api is required.
-6. Change back to the ripplecharts-frontend directory
+6. Change back to the stellar-charts-frontend directory
 
 ## Build
 
