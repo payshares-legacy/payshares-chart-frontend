@@ -21,7 +21,7 @@ angular.module( 'stellarcharts.value', [
   var dataType = store.session.get('valueChartData')     || store.get('valueChartData')     || "Capitalization";
   var format   = store.session.get('valueChartFormat')   || store.get('valueChartFormat')   || "stacked";
   var range    = store.session.get('valueChartRange')    || store.get('valueChartRange')    || "max";
-  var currency = store.session.get('valueChartCurrency') || store.get('valueChartCurrency') || "USD";
+  var currency = store.session.get('valueChartCurrency') || store.get('valueChartCurrency') || "BTC";
   
 //CapitalizationChart(); //old version
   var cap = new CapChart ({

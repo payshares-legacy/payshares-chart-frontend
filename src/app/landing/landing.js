@@ -22,13 +22,12 @@ angular.module( 'stellarcharts.landing', [
 
   var exchangeRates   = {};
   var valueCurrencies = {
-    "USD" : "gs9HHU3pmkKBuvykhNm6xiK1JKrput9i3K",  //bitstamp
-    "EUR" : "gnhPFpbYXcYGMkGxfWdQGFfuKEdJoEThVo", //snapswap
-    "LTC" : "gnhPFpbYXcYGMkGxfWdQGFfuKEdJoEThVo", //stellar trade japan
-    "STR" : "gnhPFpbYXcYGMkGxfWdQGFfuKEdJoEThVo", //stellarChina
-    "BTC" : "gnhPFpbYXcYGMkGxfWdQGFfuKEdJoEThVo", //stellarChina
-    "XRP" : ""
-  }
+    "BTC" : "gPwGQjiEZRy9k81qcFExHYvJ5Wf4qTna1c", //OneCred
+    "USD" : "gs9HHU3pmkKBuvykhNm6xiK1JKrput9i3K", //Coinex
+    "CNY" : "gP1f4UKHbvdNDZPYyjqFHTnaqGzCwyjm5E", //RippleFox
+    "NZD" : "gs9HHU3pmkKBuvykhNm6xiK1JKrput9i3K", //Coinex
+    "AUS" : "gs9HHU3pmkKBuvykhNm6xiK1JKrput9i3K"  //Coinex
+  };
   
   var totalAccounts
   var totalNetworkValueSTR;
@@ -80,23 +79,24 @@ angular.module( 'stellarcharts.landing', [
   
   markets.list([
     {
-      base    : {currency:"STR"},
-      counter : {currency:"USD", issuer:"gs9HHU3pmkKBuvykhNm6xiK1JKrput9i3K"}
+      counter : {currency:"STR"},
+      base    : {currency:"BTC", issuer:"gPwGQjiEZRy9k81qcFExHYvJ5Wf4qTna1c"}
+    },
+    {
+      counter : {currency:"STR"},
+      base    : {currency:"BTC", issuer:"gs9HHU3pmkKBuvykhNm6xiK1JKrput9i3K"}
     }, {
-      base    : {currency:'STR'},
-      counter : {currency:'LTC', issuer: 'gnhPFpbYXcYGMkGxfWdQGFfuKEdJoEThVo'}
+      counter : {currency:'STR'},
+      base    : {currency:'USD', issuer:'gs9HHU3pmkKBuvykhNm6xiK1JKrput9i3K'}
     }, {
-      base    : {currency:'BTC', issuer: 'gnhPFpbYXcYGMkGxfWdQGFfuKEdJoEThVo'},
-      counter : {currency:'STR'}
+      counter : {currency:"STR"},
+      base    : {currency:"CNY", issuer:"gP1f4UKHbvdNDZPYyjqFHTnaqGzCwyjm5E"}
     }, {
-      base    : {currency:"EUR", issuer:"gnhPFpbYXcYGMkGxfWdQGFfuKEdJoEThVo"},
-      counter : {currency:"STR"}
+      counter : {currency:'STR'},
+      base    : {currency:'NZD', issuer:'gs9HHU3pmkKBuvykhNm6xiK1JKrput9i3K'}
     }, {
-      base    : {currency:'STR'},
-      counter : {currency:'STR', issuer: 'gnhPFpbYXcYGMkGxfWdQGFfuKEdJoEThVo'}
-    }, {
-      base    : {currency:"SCT", issuer:"gDSSa75HPagWcvQmwH7D51dT5DPmvsKL4q"},
-      counter : {currency:"STR"}
+      counter : {currency:"STR"},
+      base    : {currency:"AUD", issuer:"gs9HHU3pmkKBuvykhNm6xiK1JKrput9i3K"}
     }
     ]);
 

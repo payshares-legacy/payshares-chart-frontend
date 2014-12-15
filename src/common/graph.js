@@ -4,7 +4,7 @@ networkGraph = function () {
 var UNIX_RIPPLE_TIME = 946684800;
 var RECURSION_DEPTH = 1;
 var MAX_NUTL = 360;
-var REFERENCE_NODE = store.session.get('graphID') || 'r3kmLJN5D28dHuH8vZNUZpMC43pEHpaocV';
+var REFERENCE_NODE = store.session.get('graphID') || '';
 var HALO_MARGIN = 6;
 var COLOR_TABLE = {
 //currency  |  center  |   rim  |

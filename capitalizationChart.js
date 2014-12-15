@@ -3,20 +3,19 @@ function CapitalizationChart() {
 
 // Hard-coded constants
 var GATEWAY_NAMES = { // Gateways we're going to look at
-  gnhPFpbYXcYGMkGxfWdQGFfuKEdJoEThVo: "Justcoin",
+  gPwGQjiEZRy9k81qcFExHYvJ5Wf4qTna1c: "OneCred",
   gs9HHU3pmkKBuvykhNm6xiK1JKrput9i3K: "Coinex",
-  gDSSa75HPagWcvQmwH7D51dT5DPmvsKL4q: "Stellar",
+  gP1f4UKHbvdNDZPYyjqFHTnaqGzCwyjm5E: "RippleFox"
 };
-var CURRENCIES_LIST = ["USD","CNY","EUR","BTC","LTC","NMC"]; // Currencies we're going to look at
+var CURRENCIES_LIST = ["USD", "BTC", "CNY", "NZD", "AUD", "XRP", "XHP", "BIT", "XDG"]; // Currencies we're going to look at
 var GATEWAY_NAME_ABBREVIATIONS = {
-  "Dividend Stellarr": "Div. Stellarr",
-  "The Rock Trading": "The Rock"
 };
 var CURRENCIES = { // Currencies you can measure value in
-  "BTC":["Bitstamp", "Dividend Stellarr", "Justcoin", "StellarCN", "Peercover", "StellarIsrael", "The Rock Trading", "STR China"],
-  "USD":["Bitstamp", "SnapSwap", "Peercover", "The Rock Trading"],
-  "CNY":["StellarCN", "StellarChina", "STR China"],
-  "EUR":["Bitstamp", "The Rock Trading"]
+  "USD":["Coinex"],
+  "BTC":["Coinex", "OneCred"],
+  "NZD":["Coinex"],
+  "AUD":["Coinex"],
+  "CNY":["RippleFox"]
 };
 
 

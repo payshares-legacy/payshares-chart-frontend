@@ -18,7 +18,7 @@ angular.module( 'stellarcharts.activeAccounts', [
 
 .controller( 'ActiveAccountsCtrl', function ActiveAccountsCtrl( $scope ) {
 
-  var base    = store.session.get('traderBase')    || store.get('traderBase')    || {"currency": "USD", "issuer" : "gDSSa75HPagWcvQmwH7D51dT5DPmvsKL4q"};
+  var base    = store.session.get('traderBase')    || store.get('traderBase')    || {"currency": "USD", "issuer" : "gs9HHU3pmkKBuvykhNm6xiK1JKrput9i3K"};
   var counter = store.session.get('traderCounter') || store.get('traderCounter') || {"currency": "STR"};
   var period  = store.session.get('traderPeriod')  || store.get('traderPeriod')  || "24h";
   var metric  = store.session.get('traderMetric')  || store.get('traderMetric')  || "volume";

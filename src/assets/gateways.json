@@ -1,10 +1,10 @@
 [
     {
-        "name": "Justcoin",
+        "name": "OneCred",
         "accounts":
         [{
-            "address": "gnhPFpbYXcYGMkGxfWdQGFfuKEdJoEThVo",
-            "currencies": ["BTC", "LTC", "NOK", "EUR", "STR"]
+            "address": "gPwGQjiEZRy9k81qcFExHYvJ5Wf4qTna1c",
+            "currencies": ["BTC", "BIT", "XDG"]
         }],
         "hotwallets": []
     },
@@ -13,16 +13,16 @@
         "accounts":
         [{
             "address": "gs9HHU3pmkKBuvykhNm6xiK1JKrput9i3K",
-            "currencies": ["NZD", "BTC", "USD", "AUD"]
+            "currencies": ["NZD", "AUD", "USD", "BTC", "XRP", "XHP"]
         }],
         "hotwallets": []
     },
     {
-        "name": "Stellar",
+        "name": "RippleFox",
         "accounts":
         [{
-            "address": "gDSSa75HPagWcvQmwH7D51dT5DPmvsKL4q",
-            "currencies": ["SCT"]
+            "address": "gP1f4UKHbvdNDZPYyjqFHTnaqGzCwyjm5E",
+            "currencies": ["CNY"]
         }],
         "hotwallets": []
     }

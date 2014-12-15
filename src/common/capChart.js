@@ -15,7 +15,7 @@ function CapChart(options) {
   if (!options.width)  options.width  = parseInt(chart.style('width'), 10) - options.margin.left - options.margin.right;
   if (!options.height) options.height = options.width/2.25>400 ? options.width/2.25 :400;
   
-  self.currency = options.currency || "USD";
+  self.currency = options.currency || "BTC";
   self.format   = options.format   || "stacked";
   self.dataType = options.dataType || "Capitalization";
   self.range    = options.range    || "max";
@@ -44,7 +44,7 @@ function CapChart(options) {
  
  
 //add currency dropdown    
-  var currencyList = ['BTC','USD','CAD','CNY','EUR','GBP','JPY','ILS','LTC','NZD','XAG','XAU'];
+  var currencyList = ["BTC", "USD", "CNY", "NZD", "AUD", "XRP", "XHP", "BIT", "XDG"];
   if (self.dataType=='Transaction Volume') currencyList.unshift("STR");
   var currencyDropdown = stellar.currencyDropdown(currencyList).selected({currency:self.currency})
     .on("change", function(currency) {

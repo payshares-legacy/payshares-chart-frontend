@@ -100,7 +100,7 @@ var PriceChartWidget = function (options) {
     var params = getParams();
     
     if (!params.base)    params.base    = {currency:"STR", issuer:""};
-    if (!params.counter) params.counter = {currency:"USD", issuer:"gDSSa75HPagWcvQmwH7D51dT5DPmvsKL4q"}; 
+    if (!params.counter) params.counter = {currency:"USD", issuer:"gs9HHU3pmkKBuvykhNm6xiK1JKrput9i3K"}; 
     if (!params.type)    params.type    = "line";
     if (!params.theme)   params.theme   = "light"; 
     
