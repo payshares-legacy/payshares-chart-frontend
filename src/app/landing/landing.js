@@ -35,7 +35,7 @@ angular.module( 'stellarcharts.landing', [
   var tradeVolumeSTR;
   
   $scope.valueRate;
-  $scope.valueCurrency     = "USD";
+  $scope.valueCurrency     = "BTC";
   $scope.metricDetail      = "tradeVolume";
   $scope.metricDetailTitle = "Trade Volume (last 24 hours)";
 
