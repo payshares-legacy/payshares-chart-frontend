@@ -13,7 +13,7 @@
  - [2](https://github.com/stellar/stellar-charts-frontend/pull/2) Removes AWS and Cloudflare config 
  - [1](https://github.com/stellar/stellar-charts-frontend/pull/1) Stellarizes ripple charts 
 
-//###Bug fixes
+
 
 
 
