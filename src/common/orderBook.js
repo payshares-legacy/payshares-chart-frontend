@@ -139,20 +139,9 @@ var OrderBook = function (options) {
       d.TakerPays = Amount.from_json(d.TakerPays);
 
       if (action === "asks") {
-        d.price = Amount.from_quality(d.quality,
-                                      d.TakerPays.currency(),
-                                      d.TakerPays.issuer(), {
-          base_currency: d.TakerGets.currency(),
-          reference_date: new Date()
-        });
+        d.price = d.TakerPays.divide(d.TakerGets);
       } else {
-        d.price = Amount.from_quality(d.quality,
-                                      d.TakerGets.currency(),
-                                      d.TakerGets.issuer(), {
-          inverse: true,
-          base_currency: d.TakerPays.currency(),
-          reference_date: new Date()
-        });
+        d.price = d.TakerGets.divide(d.TakerPays);
       }
           
       if (rowCount++ > max_rows) break;
