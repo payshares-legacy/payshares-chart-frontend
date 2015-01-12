@@ -292,7 +292,9 @@ var OrderBook = function (options) {
     leftTitle.text(baseCurrency);
     rightTitle.text(baseCurrency);
     
-    centerline.transition().attr("transform", "translate("+center+",0)").style("opacity",1);
+    if(!isNaN(center)) {
+      centerline.transition().attr("transform", "translate("+center+",0)").style("opacity",1);
+    }
     path.style("opacity",1);
     depth.transition().style("opacity",1); 
     loader.transition().style("opacity",0);   
