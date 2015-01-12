@@ -139,14 +139,14 @@ var OrderBook = function (options) {
       d.TakerPays = Amount.from_json(d.TakerPays);
 
       if (action === "asks") {
-        d.price = Amount.from_quality(d.BookDirectory,
+        d.price = Amount.from_quality(d.quality,
                                       d.TakerPays.currency(),
                                       d.TakerPays.issuer(), {
           base_currency: d.TakerGets.currency(),
           reference_date: new Date()
         });
       } else {
-        d.price = Amount.from_quality(d.BookDirectory,
+        d.price = Amount.from_quality(d.quality,
                                       d.TakerGets.currency(),
                                       d.TakerGets.issuer(), {
           inverse: true,
