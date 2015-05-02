@@ -1,4 +1,4 @@
-angular.module( 'stellarcharts.landing', [
+angular.module( 'paysharescharts.landing', [
   'ui.state'
 ])
 
@@ -30,9 +30,9 @@ angular.module( 'stellarcharts.landing', [
   };
   
   var totalAccounts
-  var totalNetworkValueSTR;
-  var transactionVolumeSTR;
-  var tradeVolumeSTR;
+  var totalNetworkValueXPR;
+  var transactionVolumeXPR;
+  var tradeVolumeXPR;
   
   $scope.valueRate;
   $scope.valueCurrency     = "BTC";
@@ -79,23 +79,23 @@ angular.module( 'stellarcharts.landing', [
   
   markets.list([
     {
-      counter : {currency:"STR"},
+      counter : {currency:"XPR"},
       base    : {currency:"BTC", issuer:"gPwGQjiEZRy9k81qcFExHYvJ5Wf4qTna1c"}
     },
     {
-      counter : {currency:"STR"},
+      counter : {currency:"XPR"},
       base    : {currency:"BTC", issuer:"gs9HHU3pmkKBuvykhNm6xiK1JKrput9i3K"}
     }, {
-      counter : {currency:'STR'},
+      counter : {currency:'XPR'},
       base    : {currency:'USD', issuer:'gs9HHU3pmkKBuvykhNm6xiK1JKrput9i3K'}
     }, {
-      counter : {currency:"STR"},
+      counter : {currency:"XPR"},
       base    : {currency:"CNY", issuer:"gP1f4UKHbvdNDZPYyjqFHTnaqGzCwyjm5E"}
     }, {
-      counter : {currency:'STR'},
+      counter : {currency:'XPR'},
       base    : {currency:'NZD', issuer:'gs9HHU3pmkKBuvykhNm6xiK1JKrput9i3K'}
     }, {
-      counter : {currency:"STR"},
+      counter : {currency:"XPR"},
       base    : {currency:"AUD", issuer:"gs9HHU3pmkKBuvykhNm6xiK1JKrput9i3K"}
     }
     ]);
@@ -122,13 +122,13 @@ angular.module( 'stellarcharts.landing', [
     
     if      ($scope.metricDetail == 'totalNetworkValue') {
       $scope.metricDetailTitle = "Total Network Value";
-      donut.load(totalNetworkValueSTR, ex, true);
+      donut.load(totalNetworkValueXPR, ex, true);
     } else if ($scope.metricDetail == 'transactionVolume') {
       $scope.metricDetailTitle = "Transaction Volume (last 24 hours)";
-      donut.load(transactionVolumeSTR, ex);
+      donut.load(transactionVolumeXPR, ex);
     } else if ($scope.metricDetail == 'tradeVolume') {
       $scope.metricDetailTitle = "Trade Volume (last 24 hours)";
-      donut.load(tradeVolumeSTR, ex); 
+      donut.load(tradeVolumeXPR, ex); 
     }
   });
   
@@ -182,20 +182,20 @@ angular.module( 'stellarcharts.landing', [
   if (typeof $scope.valueRate === 'undefined') return;
 
     if (metric=="totalNetworkValue") {
-      if (typeof totalNetworkValueSTR === 'undefined') return;
-      if (metric === $scope.metricDetail) donut.load(totalNetworkValueSTR, ex, true);
-      value     = totalNetworkValueSTR.total/$scope.valueRate; 
+      if (typeof totalNetworkValueXPR === 'undefined') return;
+      if (metric === $scope.metricDetail) donut.load(totalNetworkValueXPR, ex, true);
+      value     = totalNetworkValueXPR.total/$scope.valueRate; 
       precision = 0;
     
     } else if (metric=="transactionVolume") {
-      if (typeof transactionVolumeSTR === 'undefined') return;
-      if (metric === $scope.metricDetail) donut.load(transactionVolumeSTR, ex);
-      value     = transactionVolumeSTR.total/$scope.valueRate;
+      if (typeof transactionVolumeXPR === 'undefined') return;
+      if (metric === $scope.metricDetail) donut.load(transactionVolumeXPR, ex);
+      value     = transactionVolumeXPR.total/$scope.valueRate;
       precision = 2;             
     } else if (metric=="tradeVolume") {
-      if (typeof tradeVolumeSTR === 'undefined') return;      
-      if (metric === $scope.metricDetail) donut.load(tradeVolumeSTR, ex);
-      value     = tradeVolumeSTR.total/$scope.valueRate;     
+      if (typeof tradeVolumeXPR === 'undefined') return;      
+      if (metric === $scope.metricDetail) donut.load(tradeVolumeXPR, ex);
+      value     = tradeVolumeXPR.total/$scope.valueRate;     
       precision = 2;
     } 
     
@@ -204,7 +204,7 @@ angular.module( 'stellarcharts.landing', [
       case "JPY": sign = "¥"; break;
       case "CNY": sign = "¥"; break;
       case "EUR": sign = "€"; break;
-      case "STR": sign = "";  break;
+      case "XPR": sign = "";  break;
       default   : sign = "";  break;
     }      
       
@@ -229,7 +229,7 @@ angular.module( 'stellarcharts.landing', [
         data = {total:0};
       }
       
-      totalNetworkValueSTR = data;
+      totalNetworkValueXPR = data;
       showValue("totalNetworkValue");          
     });
     
@@ -239,7 +239,7 @@ angular.module( 'stellarcharts.landing', [
         data = {total:0};
       }
       
-      transactionVolumeSTR = data;
+      transactionVolumeXPR = data;
       showValue("transactionVolume");                
     });
     
@@ -249,7 +249,7 @@ angular.module( 'stellarcharts.landing', [
         data = {total:0};
       }
       
-      tradeVolumeSTR = data;
+      tradeVolumeXPR = data;
       showValue("tradeVolume");    
     });
   }
@@ -259,7 +259,7 @@ angular.module( 'stellarcharts.landing', [
   function setValueRate (currency, useCached, callback) {
     var issuer = valueCurrencies[currency];
     
-    if (currency == "STR") {
+    if (currency == "XPR") {
       $scope.valueRate = 1;
       $scope.valueRateDisplay = "";
       return callback();
@@ -268,7 +268,7 @@ angular.module( 'stellarcharts.landing', [
     //check for cached
     if (useCached && exchangeRates[currency+"."+issuer]) {
       $scope.valueRate = exchangeRates[currency+"."+issuer];
-      $scope.valueRateDisplay = commas(1/$scope.valueRate,4)  + " STR/"+currency;
+      $scope.valueRateDisplay = commas(1/$scope.valueRate,4)  + " XPR/"+currency;
       return callback();
     }
     
@@ -284,7 +284,7 @@ angular.module( 'stellarcharts.landing', [
       }
             
       $scope.valueRate = exchangeRates[currency+"."+issuer] || 0;
-      if ($scope.valueRate) $scope.valueRateDisplay = commas(1/$scope.valueRate,4) + " STR/"+currency;
+      if ($scope.valueRate) $scope.valueRateDisplay = commas(1/$scope.valueRate,4) + " XPR/"+currency;
       callback();
     });     
   }
@@ -296,7 +296,7 @@ angular.module( 'stellarcharts.landing', [
     api.exchangeRates({
       pairs:[{
         base    : {currency : c.currency, issuer : c.issuer},
-        counter : {currency:"STR"}
+        counter : {currency:"XPR"}
       }]
       
     }, function(err, data){

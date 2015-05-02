@@ -3,17 +3,17 @@
 Options = {
   theme     : "light",
   base      : {currency:"BTC", issuer:"gDSSa75HPagWcvQmwH7D51dT5DPmvsKL4q"},
-  trade     : {currency:"STR", issuer:""},
+  trade     : {currency:"XPR", issuer:""},
   chartType : "line",
   interval  : "1h",
  
-  stellar    : {
+  payshares    : {
     
     trace   : false,
     trusted : false,
 
     servers: [
-      { host: 'live.stellar.org', port: 9001, secure: true }
+      { host: 'live.payshares.co', port: 5015, secure: true }
     ],
 
     connection_offset: 0

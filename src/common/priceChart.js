@@ -1,6 +1,6 @@
 
 if (typeof LOADER_PNG == 'undefined') 
-      LOADER_PNG = "assets/images/stellarThrobber.png";
+      LOADER_PNG = "assets/images/paysharesThrobber.png";
 else  LOADER_PNG = "data:image/png;base64," + LOADER_PNG;
 
 
@@ -271,7 +271,7 @@ PriceChart = function (options) {
   }
 
 
-//enable the live feed via stellar-lib
+//enable the live feed via payshares-lib
   function setLiveFeed () {
     var candle = {
         startTime     : lastCandle,
@@ -375,8 +375,8 @@ PriceChart = function (options) {
     var candleWidth = options.width/(num*1.3);
     if (candleWidth<3) candleWidth = 3; 
 
-    var baseCurrency    = stellar.Currency.from_json(base.currency).to_human();
-    var counterCurrency = stellar.Currency.from_json(counter.currency).to_human();
+    var baseCurrency    = payshares.Currency.from_json(base.currency).to_human();
+    var counterCurrency = payshares.Currency.from_json(counter.currency).to_human();
     
     gEnter.select(".axis.price").select("text").text("Price ("+counterCurrency+")");
     gEnter.select(".axis.volume").select("text").text("Volume ("+baseCurrency+")");
@@ -534,7 +534,7 @@ PriceChart = function (options) {
       o, h, l, c, v;
 
     if (d) {
-      if (stellar && stellar.Amount) {
+      if (payshares && payshares.Amount) {
         o = filter(d.open, counter.currency);
         h = filter(d.high,  counter.currency);
         l = filter(d.low,   counter.currency);
@@ -551,7 +551,7 @@ PriceChart = function (options) {
         v = d.baseVolume.toFixed(2);
       }
 
-      var baseCurrency = stellar.Currency.from_json(base.currency).to_human();    
+      var baseCurrency = payshares.Currency.from_json(base.currency).to_human();    
       var details = div.select('.chartDetails');
       details.html("<span class='date'>"+ parseDate(d.startTime.local(), chartInterval) + 
         "</span><span><small>O:</small><b>" + o  + "</b></span>" +
@@ -577,7 +577,7 @@ PriceChart = function (options) {
   }
 
   function filter(amount, currency) {
-    return stellar.Amount.from_human(amount + " " + currency).to_human({max_sig_digits:6});  
+    return payshares.Amount.from_human(amount + " " + currency).to_human({max_sig_digits:6});  
   }
   
 //apply rules to get the start times to line up nicely

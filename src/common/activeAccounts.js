@@ -75,7 +75,7 @@ var ActiveAccounts = function (options){
     
   var loader = wrap.append("img")
     .attr("class", "loader")
-    .attr("src", "assets/images/stellarThrobber.png");
+    .attr("src", "assets/images/paysharesThrobber.png");
       
   var table = div.append("div").attr("class","accountsTable");
   var accountsHeader = table.append("div").attr("class","accountsHeader");

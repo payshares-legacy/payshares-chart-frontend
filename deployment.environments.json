@@ -6,12 +6,12 @@
   },
   
   "staging": {
-    "api"         : "https://data-stg.stellar.org/api",
-    "domain"      : "https://charts-stg.stellar.org"
+    "api"         : "https://data-stg.payshares.org/api",
+    "domain"      : "https://charts-stg.payshares.org"
   },
   
   "production": {
-    "api"         : "https://data.stellar.org/api",
-    "domain"      : "https://charts.stellar.org"
+    "api"         : "https://data.payshares.org/api",
+    "domain"      : "https://charts.payshares.org"
   }
 }

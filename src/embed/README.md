@@ -12,7 +12,7 @@ of loading from the query string or from custom parameters.
   id        : id of element that will contain the chart. if not specified, the chart will be appended the body
   bodyTheme : true/false - setting true will apply the chart theme to the entire document, defaults to false
   customCSS : true/false - disables the default styling
-  apiURL    : custom url for the API backend, defaults to charts.stellar.org API
+  apiURL    : custom url for the API backend, defaults to charts.payshares.org API
   width     : width of chart
   height    : height of chart
   margin    : e.g. "{top:50,bottom:50,left:50,right:50}" - axis labels are drawn in the margin
@@ -34,13 +34,13 @@ of loading from the query string or from custom parameters.
 ####Embedded IFRAME:
 
 ```
-<iframe src='http://charts.stellar.org/embed/pricechart?theme=dark&type=line&counter={"currency":"USD","issuer":"gDSSa75HPagWcvQmwH7D51dT5DPmvsKL4q"}&base={"currency":"STR"}'/>
+<iframe src='http://charts.payshares.org/embed/pricechart?theme=dark&type=line&counter={"currency":"USD","issuer":"gDSSa75HPagWcvQmwH7D51dT5DPmvsKL4q"}&base={"currency":"XPR"}'/>
 ```
 
 ####Javascript object:
 
 ```
-<script type="text/javascript" src="http://charts.stellar.org/embed/pricechart/script.js"></script>
+<script type="text/javascript" src="http://charts.payshares.org/embed/pricechart/script.js"></script>
 <script>
 
  //load from the query string
@@ -58,7 +58,7 @@ of loading from the query string or from custom parameters.
 
  chart.load({
    base : {
-     "currency" : "STR"
+     "currency" : "XPR"
    },
    counter : {
      "currency" : "USD",
@@ -77,7 +77,7 @@ of loading from the query string or from custom parameters.
  
  one.load({
    base : {
-     "currency" : "STR"
+     "currency" : "XPR"
    },
    counter : {
      "currency" : "USD",
@@ -91,7 +91,7 @@ of loading from the query string or from custom parameters.
  
    two.load({
    base : {
-     "currency" : "STR"
+     "currency" : "XPR"
    },
    counter : {
      "currency" : "USD",

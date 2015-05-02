@@ -87,7 +87,7 @@ module.exports = {
       'bower_components/jscrollpane/script/jquery.jscrollpane.js',
       'deps/jquery.selectbox.min.js',
       'deps/jquery.inview.js',
-      'deps/stellar-lib.js',
+      'deps/payshares-lib.js',
       'deps/offersExercisedListener.js',
       'deps/onResize.js'
     ],

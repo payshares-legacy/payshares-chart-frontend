@@ -1,4 +1,4 @@
-angular.module( 'stellarcharts.graph', [
+angular.module( 'paysharescharts.graph', [
   'ui.state',
   'ui.bootstrap'
 ])

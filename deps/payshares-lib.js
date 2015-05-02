@@ -1,4 +1,4 @@
-var stellar =
+var payshares =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	
 /******/ 	// The module cache
@@ -673,7 +673,7 @@ var stellar =
 	};
 
 	/**
-	 * Reconnect to the Stellar network immediately.
+	 * Reconnect to the Payshares network immediately.
 	 *
 	 * @api public
 	 */
@@ -1574,7 +1574,7 @@ var stellar =
 	    currency: Currency.json_rewrite(gets.currency)
 	  };
 
-	  if (request.message.taker_gets.currency !== 'STR') {
+	  if (request.message.taker_gets.currency !== 'XPR') {
 	    request.message.taker_gets.issuer = UInt160.json_rewrite(gets.issuer);
 	  }
 
@@ -1582,7 +1582,7 @@ var stellar =
 	    currency: Currency.json_rewrite(pays.currency)
 	  };
 
-	  if (request.message.taker_pays.currency !== 'STR') {
+	  if (request.message.taker_pays.currency !== 'XPR') {
 	    request.message.taker_pays.issuer = UInt160.json_rewrite(pays.issuer);
 	  }
 
@@ -1892,7 +1892,7 @@ var stellar =
 	};
 
 	Remote.prepareTrade = function(currency, issuer) {
-	  return currency + (currency === 'STR' ? '' : ('/' + issuer));
+	  return currency + (currency === 'XPR' ? '' : ('/' + issuer));
 	};
 
 	/**
@@ -2759,7 +2759,7 @@ var stellar =
 	      currency: Currency.json_rewrite(book[side].currency)
 	    };
 
-	    if (obj.currency !== 'STR') {
+	    if (obj.currency !== 'XPR') {
 	      obj.issuer = UInt160.json_rewrite(book[side].issuer);
 	    }
 	  }
@@ -3403,7 +3403,7 @@ var stellar =
 	  var m = String(j).match(Amount.human_RE);
 
 	  if (m) {
-	    var currency   = m[1] || m[5] || 'STR';
+	    var currency   = m[1] || m[5] || 'XPR';
 	    var integer    = m[3] || '0';
 	    var fraction   = m[4] || '';
 	    var precision  = null;
@@ -3413,8 +3413,8 @@ var stellar =
 	    this._value = new BigInteger(integer);
 	    this.set_currency(currency);
 
-	    // STR have exactly six digits of precision
-	    if (currency === 'STR') {
+	    // XPR have exactly six digits of precision
+	    if (currency === 'XPR') {
 	      fraction = fraction.slice(0, 6);
 	      while (fraction.length < 6) {
 	        fraction += '0';
@@ -3594,7 +3594,7 @@ var stellar =
 	        j.copyTo(this);
 	      } else if (j.hasOwnProperty('value')) {
 	        // Parse the passed value to sanitize and copy it.
-	        this._currency.parse_json(j.currency, true); // Never STR.
+	        this._currency.parse_json(j.currency, true); // Never XPR.
 
 	        if (typeof j.issuer === 'string') {
 	          this._issuer.parse_json(j.issuer);
@@ -3611,7 +3611,7 @@ var stellar =
 	  return this;
 	};
 
-	// Parse a STR value from untrusted input.
+	// Parse a XPR value from untrusted input.
 	// - integer = raw units
 	// - float = with precision 6
 	// XXX Improvements: disallow leading zeros.
@@ -3952,7 +3952,7 @@ var stellar =
 	Amount.prototype.to_text_full = function(opts) {
 	  return this._value instanceof BigInteger
 	    ? this._is_native
-	      ? this.to_human() + '/STR'
+	      ? this.to_human() + '/XPR'
 	      : this.to_text() + '/' + this._currency.to_json() + '/' + this._issuer.to_json(opts)
 	    : NaN;
 	};
@@ -3977,7 +3977,7 @@ var stellar =
 	    } else if (this._is_native !== d._is_native) {
 	      result = 'Native mismatch.';
 	    } else {
-	      var type = this._is_native ? 'STR' : 'Non-STR';
+	      var type = this._is_native ? 'XPR' : 'Non-XPR';
 
 	      if (!this._value.equals(d._value) || this._offset !== d._offset) {
 	        result = type + ' value differs.';
@@ -3985,9 +3985,9 @@ var stellar =
 	        result = type + ' sign differs.';
 	      } else if (!this._is_native) {
 	        if (!this._currency.equals(d._currency)) {
-	          result = 'Non-STR currency differs.';
+	          result = 'Non-XPR currency differs.';
 	        } else if (!ignore_issuer && !this._issuer.equals(d._issuer)) {
-	          result = 'Non-STR issuer differs: ' + d._issuer.to_json() + '/' + this._issuer.to_json();
+	          result = 'Non-XPR issuer differs: ' + d._issuer.to_json() + '/' + this._issuer.to_json();
 	        }
 	      }
 	    }
@@ -4554,7 +4554,8 @@ var stellar =
 	  TrustSet: {
 	    SetAuth:            0x00010000,
 	    NoRipple:           0x00020000,
-	    ClearNoRipple:      0x00040000
+	    ClearNoRipple:      0x00040000,
+	    ClearAuth:          0x00080000
 	  },
 
 	  OfferCreate: {
@@ -4990,6 +4991,12 @@ var stellar =
 	  return this;
 	};
 
+	Transaction.prototype.setAuthKey = function(acc) {
+	    this.tx_json.SetAuthKey = UInt160.json_rewrite(acc);
+
+	    return this;
+	};
+
 
 	// Add flags to a transaction.
 	// --> flags: undefined, _flag_, or [ _flags_ ]
@@ -5385,11 +5392,11 @@ var stellar =
 	//
 
 	var Currency = extend(function() {
-	  // Internal form: 0 = XRP. 3 letter-code.
+	  // Internal form: 0 = XPR. 3 letter-code.
 	  // XXX Internal should be 0 or hex with three letter annotation when valid.
 
 	  // Json form:
-	  //  '', 'XRP', '0': 0
+	  //  '', 'XPR', '0': 0
 	  //  3-letter code: ...
 	  // XXX Should support hex, C++ doesn't currently allow it.
 
@@ -5447,7 +5454,7 @@ var stellar =
 
 	  switch (typeof j) {
 	    case 'string':
-	      if (!j || /^(0|STR)$/.test(j)) {
+	      if (!j || /^(0|XPR)$/.test(j)) {
 	        if (shouldInterpretXrpAsIou) {
 	          this.parse_hex(Currency.HEX_CURRENCY_BAD);
 	        } else {
@@ -5555,7 +5562,7 @@ var stellar =
 	  var isZeroExceptInStandardPositions = true;
 
 	  if (!bytes) {
-	    return "STR";
+	    return "XPR";
 	  }
 
 	  this._native = false;
@@ -5575,7 +5582,7 @@ var stellar =
 
 	    if (this._iso_code === '\0\0\0') {
 	      this._native = true;
-	      this._iso_code = "STR";
+	      this._iso_code = "XPR";
 	    }
 
 	    this._type = 0;
@@ -5686,7 +5693,7 @@ var stellar =
 	Currency.prototype.to_json = function(opts) {
 	  if (!this.is_valid()) {
 	    // XXX This is backwards compatible behavior, but probably not very good.
-	    return "STR";
+	    return "XPR";
 	  }
 
 	  var currency;
@@ -5933,12 +5940,12 @@ var stellar =
 	UInt160.prototype = extend({}, UInt.prototype);
 	UInt160.prototype.constructor = UInt160;
 
-	var ACCOUNT_ZERO = UInt160.ACCOUNT_ZERO = 'ggggggggggggggggggggghoLvTp';
-	var ACCOUNT_ONE  = UInt160.ACCOUNT_ONE  = 'ggggggggggggggggggggBZbvji';
+	var ACCOUNT_ZERO = UInt160.ACCOUNT_ZERO = 'xxxxxxxxxxxxxxxxxxxxxhoLvTp';
+	var ACCOUNT_ONE  = UInt160.ACCOUNT_ONE  = 'xxxxxxxxxxxxxxxxxxxxBZbvji';
 	var HEX_ZERO     = UInt160.HEX_ZERO     = '0000000000000000000000000000000000000000';
 	var HEX_ONE      = UInt160.HEX_ONE      = '0000000000000000000000000000000000000001';
-	var STR_ZERO     = UInt160.STR_ZERO     = utils.hexToString(HEX_ZERO);
-	var STR_ONE      = UInt160.STR_ONE      = utils.hexToString(HEX_ONE);
+	var XPR_ZERO     = UInt160.XPR_ZERO     = utils.hexToString(HEX_ZERO);
+	var XPR_ONE      = UInt160.XPR_ONE      = utils.hexToString(HEX_ONE);
 
 	UInt160.prototype.set_version = function(j) {
 	  this._version_byte = j;
@@ -6035,8 +6042,8 @@ var stellar =
 
 	var HEX_ZERO = UInt256.HEX_ZERO = '00000000000000000000000000000000' + '00000000000000000000000000000000';
 	var HEX_ONE  = UInt256.HEX_ONE  = '00000000000000000000000000000000' + '00000000000000000000000000000001';
-	var STR_ZERO = UInt256.STR_ZERO = utils.hexToString(HEX_ZERO);
-	var STR_ONE  = UInt256.STR_ONE  = utils.hexToString(HEX_ONE);
+	var XPR_ZERO = UInt256.XPR_ZERO = utils.hexToString(HEX_ZERO);
+	var XPR_ONE  = UInt256.XPR_ONE  = utils.hexToString(HEX_ONE);
 
 	exports.UInt256 = UInt256;
 
@@ -6314,10 +6321,10 @@ var stellar =
 	    var pays = Amount.from_json(an.fields.TakerPays);
 
 	    var getsKey = gets.currency().to_json();
-	    if (getsKey !== 'STR') getsKey += '/' + gets.issuer().to_json();
+	    if (getsKey !== 'XPR') getsKey += '/' + gets.issuer().to_json();
 
 	    var paysKey = pays.currency().to_json();
-	    if (paysKey !== 'STR') paysKey += '/' + pays.issuer().to_json();
+	    if (paysKey !== 'XPR') paysKey += '/' + pays.issuer().to_json();
 
 	    var key = [ getsKey, paysKey ].join(':');
 
@@ -7854,7 +7861,8 @@ var stellar =
 	    4: 'Issuer',
 	    7: 'Target',
 	    8: 'RegularKey',
-	    9: 'InflationDest'
+	    9: 'InflationDest',
+	    10: 'SetAuthKey'
 	  },
 	  14: { // Object
 	    1: void(0),  //end of Object
@@ -7936,7 +7944,8 @@ var stellar =
 	    [ 'MessageKey'         , OPTIONAL ],
 	    [ 'Domain'             , OPTIONAL ],
 	    [ 'TransferRate'       , OPTIONAL ],
-	    [ 'InflationDest'      , OPTIONAL ]
+	    [ 'InflationDest'      , OPTIONAL ],
+	    [ 'SetAuthKey'         , OPTIONAL ]
 	  ]),
 	  AccountMerge: [4].concat(base, [
 	    [ 'Destination'        , REQUIRED ]
@@ -8111,7 +8120,7 @@ var stellar =
 	  tecINSUF_RESERVE_LINE: 122,
 	  tecINSUF_RESERVE_OFFER: 123,
 	  tecNO_DST: 124,
-	  tecNO_DST_INSUF_XRP: 125,
+	  tecNO_DST_INSUF_XPR: 125,
 	  tecNO_LINE_INSUF_RESERVE: 126,
 	  tecNO_LINE_REDUNDANT: 127,
 	  tecPATH_DRY: 128,
@@ -9242,11 +9251,11 @@ var stellar =
 	    }
 	  };
 
-	  if (this._currency_gets !== 'STR') {
+	  if (this._currency_gets !== 'XPR') {
 	    json.taker_gets.issuer = this._issuer_gets;
 	  }
 
-	  if (this._currency_pays !== 'STR') {
+	  if (this._currency_pays !== 'XPR') {
 	    json.taker_pays.issuer = this._issuer_pays;
 	  }
 
@@ -9263,19 +9272,19 @@ var stellar =
 	  // XXX Should check for same currency (non-native) && same issuer
 	  return (
 	    Currency.is_valid(this._currency_pays) &&
-	    (this._currency_pays === 'STR' || UInt160.is_valid(this._issuer_pays)) &&
+	    (this._currency_pays === 'XPR' || UInt160.is_valid(this._issuer_pays)) &&
 	    Currency.is_valid(this._currency_gets) &&
-	    (this._currency_gets === 'STR' || UInt160.is_valid(this._issuer_gets)) &&
-	    !(this._currency_pays === 'STR' && this._currency_gets === 'STR')
+	    (this._currency_gets === 'XPR' || UInt160.is_valid(this._issuer_gets)) &&
+	    !(this._currency_pays === 'XPR' && this._currency_gets === 'XPR')
 	  );
 	};
 
 	OrderBook.prototype.trade = function(type) {
-	  var tradeStr = '0'
-	  + ((this['_currency_' + type] === 'STR') ? '' : '/'
+	  var tradeXpr = '0'
+	  + ((this['_currency_' + type] === 'XPR') ? '' : '/'
 	     + this['_currency_' + type ] + '/'
 	     + this['_issuer_' + type]);
-	  return Amount.from_json(tradeStr);
+	  return Amount.from_json(tradeXpr);
 	};
 
 	/**
@@ -10829,14 +10838,14 @@ var stellar =
 	  switch (j) {
 	    case undefined:
 	      case '0':
-	      case this.constructor.STR_ZERO:
+	      case this.constructor.XPR_ZERO:
 	      case this.constructor.ACCOUNT_ZERO:
 	      case this.constructor.HEX_ZERO:
 	      this._value  = BigInteger.valueOf();
 	      break;
 
 	    case '1':
-	      case this.constructor.STR_ONE:
+	      case this.constructor.XPR_ONE:
 	      case this.constructor.ACCOUNT_ONE:
 	      case this.constructor.HEX_ONE:
 	      this._value  = new BigInteger([1]);
@@ -16811,7 +16820,7 @@ var stellar =
 	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 	// USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-	var punycode = __webpack_require__(64);
+	var punycode = __webpack_require__(65);
 
 	exports.parse = urlParse;
 	exports.resolve = urlResolve;
@@ -16879,7 +16888,7 @@ var stellar =
 	      'gopher:': true,
 	      'file:': true
 	    },
-	    querystring = __webpack_require__(65);
+	    querystring = __webpack_require__(64);
 
 	function urlParse(url, parseQueryString, slashesDenoteHost) {
 	  if (url && typeof(url) === 'object' && url.href) return url;
@@ -17635,8 +17644,8 @@ var stellar =
 
 	var HEX_ZERO = UInt128.HEX_ZERO = '00000000000000000000000000000000';
 	var HEX_ONE  = UInt128.HEX_ONE  = '00000000000000000000000000000000';
-	var STR_ZERO = UInt128.STR_ZERO = utils.hexToString(HEX_ZERO);
-	var STR_ONE  = UInt128.STR_ONE  = utils.hexToString(HEX_ONE);
+	var XPR_ZERO = UInt128.XPR_ZERO = utils.hexToString(HEX_ZERO);
+	var XPR_ONE  = UInt128.XPR_ONE  = utils.hexToString(HEX_ONE);
 
 	exports.UInt128 = UInt128;
 
@@ -18159,6 +18168,7 @@ var stellar =
 	function use (self, hit) {
 	  shiftLU(self, hit)
 	  hit.lu = self._mru ++
+	  if (self._maxAge) hit.now = Date.now()
 	  self._lruList[hit.lu] = hit
 	}
 
@@ -20436,7 +20446,7 @@ var stellar =
 	/* WEBPACK VAR INJECTION */(function(Buffer) {var createHash = __webpack_require__(69)
 
 	var md5 = toConstructor(__webpack_require__(62))
-	var rmd160 = toConstructor(__webpack_require__(71))
+	var rmd160 = toConstructor(__webpack_require__(57))
 
 	function toConstructor (fn) {
 	  return function () {
@@ -22554,6 +22564,120 @@ var stellar =
 /* 64 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var __WEBPACK_AMD_DEFINE_RESULT__;// Copyright Joyent, Inc. and other Node contributors.
+	//
+	// Permission is hereby granted, free of charge, to any person obtaining a
+	// copy of this software and associated documentation files (the
+	// "Software"), to deal in the Software without restriction, including
+	// without limitation the rights to use, copy, modify, merge, publish,
+	// distribute, sublicense, and/or sell copies of the Software, and to permit
+	// persons to whom the Software is furnished to do so, subject to the
+	// following conditions:
+	//
+	// The above copyright notice and this permission notice shall be included
+	// in all copies or substantial portions of the Software.
+	//
+	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+	// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+	// Query String Utilities
+
+	!(__WEBPACK_AMD_DEFINE_RESULT__ = (function(require, exports, module, undefined) {
+	"use strict";
+
+	var QueryString = exports;
+
+	function charCode(c) {
+	  return c.charCodeAt(0);
+	}
+
+	QueryString.unescape = decodeURIComponent;
+	QueryString.escape = encodeURIComponent;
+
+	var stringifyPrimitive = function(v) {
+	  switch (typeof v) {
+	    case 'string':
+	      return v;
+
+	    case 'boolean':
+	      return v ? 'true' : 'false';
+
+	    case 'number':
+	      return isFinite(v) ? v : '';
+
+	    default:
+	      return '';
+	  }
+	};
+
+
+	QueryString.stringify = QueryString.encode = function(obj, sep, eq, name) {
+	  sep = sep || '&';
+	  eq = eq || '=';
+	  obj = (obj === null) ? undefined : obj;
+
+	  switch (typeof obj) {
+	    case 'object':
+	      return Object.keys(obj).map(function(k) {
+	        if (Array.isArray(obj[k])) {
+	          return obj[k].map(function(v) {
+	            return QueryString.escape(stringifyPrimitive(k)) +
+	                   eq +
+	                   QueryString.escape(stringifyPrimitive(v));
+	          }).join(sep);
+	        } else {
+	          return QueryString.escape(stringifyPrimitive(k)) +
+	                 eq +
+	                 QueryString.escape(stringifyPrimitive(obj[k]));
+	        }
+	      }).join(sep);
+
+	    default:
+	      if (!name) return '';
+	      return QueryString.escape(stringifyPrimitive(name)) + eq +
+	             QueryString.escape(stringifyPrimitive(obj));
+	  }
+	};
+
+	// Parse a key=val string.
+	QueryString.parse = QueryString.decode = function(qs, sep, eq) {
+	  sep = sep || '&';
+	  eq = eq || '=';
+	  var obj = {};
+
+	  if (typeof qs !== 'string' || qs.length === 0) {
+	    return obj;
+	  }
+
+	  qs.split(sep).forEach(function(kvp) {
+	    var x = kvp.split(eq);
+	    var k = QueryString.unescape(x[0], true);
+	    var v = QueryString.unescape(x.slice(1).join(eq), true);
+
+	    if (!(k in obj)) {
+	      obj[k] = v;
+	    } else if (!Array.isArray(obj[k])) {
+	      obj[k] = [obj[k], v];
+	    } else {
+	      obj[k].push(v);
+	    }
+	  });
+
+	  return obj;
+	};
+
+	}.call(exports, __webpack_require__, exports, module)), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+
+/***/ },
+/* 65 */
+/***/ function(module, exports, __webpack_require__) {
+
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;var require;/* WEBPACK VAR INJECTION */(function(module) {/*! http://mths.be/punycode by @mathias */
 	;(function(root) {
 
@@ -22565,7 +22689,7 @@ var stellar =
 		var punycode,
 
 		/** Detect free variables `define`, `exports`, `module` and `require` */
-		freeDefine = __webpack_require__(75),
+		freeDefine = __webpack_require__(74),
 		freeExports = typeof exports == 'object' && exports,
 		freeModule = typeof module == 'object' && module,
 		freeRequire = typeof require == 'function' && require,
@@ -23056,7 +23180,7 @@ var stellar =
 					punycode.hasOwnProperty(key) && (freeExports[key] = punycode[key]);
 				}
 			}
-		} else if (__webpack_require__(75)) {
+		} else if (__webpack_require__(74)) {
 			// via curl.js or RequireJS
 			!(__WEBPACK_AMD_DEFINE_FACTORY__ = (punycode), (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_RESULT__ = __WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : module.exports = __WEBPACK_AMD_DEFINE_FACTORY__));
 		} else {
@@ -23065,121 +23189,7 @@ var stellar =
 		}
 
 	}(this));
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(76)(module)))
-
-/***/ },
-/* 65 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __WEBPACK_AMD_DEFINE_RESULT__;// Copyright Joyent, Inc. and other Node contributors.
-	//
-	// Permission is hereby granted, free of charge, to any person obtaining a
-	// copy of this software and associated documentation files (the
-	// "Software"), to deal in the Software without restriction, including
-	// without limitation the rights to use, copy, modify, merge, publish,
-	// distribute, sublicense, and/or sell copies of the Software, and to permit
-	// persons to whom the Software is furnished to do so, subject to the
-	// following conditions:
-	//
-	// The above copyright notice and this permission notice shall be included
-	// in all copies or substantial portions of the Software.
-	//
-	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-	// USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-	// Query String Utilities
-
-	!(__WEBPACK_AMD_DEFINE_RESULT__ = (function(require, exports, module, undefined) {
-	"use strict";
-
-	var QueryString = exports;
-
-	function charCode(c) {
-	  return c.charCodeAt(0);
-	}
-
-	QueryString.unescape = decodeURIComponent;
-	QueryString.escape = encodeURIComponent;
-
-	var stringifyPrimitive = function(v) {
-	  switch (typeof v) {
-	    case 'string':
-	      return v;
-
-	    case 'boolean':
-	      return v ? 'true' : 'false';
-
-	    case 'number':
-	      return isFinite(v) ? v : '';
-
-	    default:
-	      return '';
-	  }
-	};
-
-
-	QueryString.stringify = QueryString.encode = function(obj, sep, eq, name) {
-	  sep = sep || '&';
-	  eq = eq || '=';
-	  obj = (obj === null) ? undefined : obj;
-
-	  switch (typeof obj) {
-	    case 'object':
-	      return Object.keys(obj).map(function(k) {
-	        if (Array.isArray(obj[k])) {
-	          return obj[k].map(function(v) {
-	            return QueryString.escape(stringifyPrimitive(k)) +
-	                   eq +
-	                   QueryString.escape(stringifyPrimitive(v));
-	          }).join(sep);
-	        } else {
-	          return QueryString.escape(stringifyPrimitive(k)) +
-	                 eq +
-	                 QueryString.escape(stringifyPrimitive(obj[k]));
-	        }
-	      }).join(sep);
-
-	    default:
-	      if (!name) return '';
-	      return QueryString.escape(stringifyPrimitive(name)) + eq +
-	             QueryString.escape(stringifyPrimitive(obj));
-	  }
-	};
-
-	// Parse a key=val string.
-	QueryString.parse = QueryString.decode = function(qs, sep, eq) {
-	  sep = sep || '&';
-	  eq = eq || '=';
-	  var obj = {};
-
-	  if (typeof qs !== 'string' || qs.length === 0) {
-	    return obj;
-	  }
-
-	  qs.split(sep).forEach(function(kvp) {
-	    var x = kvp.split(eq);
-	    var k = QueryString.unescape(x[0], true);
-	    var v = QueryString.unescape(x.slice(1).join(eq), true);
-
-	    if (!(k in obj)) {
-	      obj[k] = v;
-	    } else if (!Array.isArray(obj[k])) {
-	      obj[k] = [obj[k], v];
-	    } else {
-	      obj[k].push(v);
-	    }
-	  });
-
-	  return obj;
-	};
-
-	}.call(exports, __webpack_require__, exports, module)), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(75)(module)))
 
 /***/ },
 /* 66 */
@@ -23199,12 +23209,16 @@ var stellar =
 		var NUMBER = '0'.charCodeAt(0)
 		var LOWER  = 'a'.charCodeAt(0)
 		var UPPER  = 'A'.charCodeAt(0)
+		var PLUS_URL_SAFE = '-'.charCodeAt(0)
+		var SLASH_URL_SAFE = '_'.charCodeAt(0)
 
 		function decode (elt) {
 			var code = elt.charCodeAt(0)
-			if (code === PLUS)
+			if (code === PLUS ||
+			    code === PLUS_URL_SAFE)
 				return 62 // '+'
-			if (code === SLASH)
+			if (code === SLASH ||
+			    code === SLASH_URL_SAFE)
 				return 63 // '/'
 			if (code < NUMBER)
 				return -1 //no match
@@ -23516,12 +23530,12 @@ var stellar =
 	  return new Alg()
 	}
 
-	var Buffer = __webpack_require__(77).Buffer
-	var Hash   = __webpack_require__(72)(Buffer)
+	var Buffer = __webpack_require__(76).Buffer
+	var Hash   = __webpack_require__(71)(Buffer)
 
 	exports.sha =
-	exports.sha1 = __webpack_require__(73)(Buffer, Hash)
-	exports.sha256 = __webpack_require__(74)(Buffer, Hash)
+	exports.sha1 = __webpack_require__(72)(Buffer, Hash)
+	exports.sha256 = __webpack_require__(73)(Buffer, Hash)
 
 
 /***/ },
@@ -23569,219 +23583,7 @@ var stellar =
 /* 71 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(Buffer) {
-	module.exports = ripemd160
-
-
-
-	/*
-	CryptoJS v3.1.2
-	code.google.com/p/crypto-js
-	(c) 2009-2013 by Jeff Mott. All rights reserved.
-	code.google.com/p/crypto-js/wiki/License
-	*/
-	/** @preserve
-	(c) 2012 by Cédric Mesnil. All rights reserved.
-
-	Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
-
-	    - Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
-	    - Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
-
-	THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-	*/
-
-	// Constants table
-	var zl = [
-	    0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15,
-	    7,  4, 13,  1, 10,  6, 15,  3, 12,  0,  9,  5,  2, 14, 11,  8,
-	    3, 10, 14,  4,  9, 15,  8,  1,  2,  7,  0,  6, 13, 11,  5, 12,
-	    1,  9, 11, 10,  0,  8, 12,  4, 13,  3,  7, 15, 14,  5,  6,  2,
-	    4,  0,  5,  9,  7, 12,  2, 10, 14,  1,  3,  8, 11,  6, 15, 13];
-	var zr = [
-	    5, 14,  7,  0,  9,  2, 11,  4, 13,  6, 15,  8,  1, 10,  3, 12,
-	    6, 11,  3,  7,  0, 13,  5, 10, 14, 15,  8, 12,  4,  9,  1,  2,
-	    15,  5,  1,  3,  7, 14,  6,  9, 11,  8, 12,  2, 10,  0,  4, 13,
-	    8,  6,  4,  1,  3, 11, 15,  0,  5, 12,  2, 13,  9,  7, 10, 14,
-	    12, 15, 10,  4,  1,  5,  8,  7,  6,  2, 13, 14,  0,  3,  9, 11];
-	var sl = [
-	     11, 14, 15, 12,  5,  8,  7,  9, 11, 13, 14, 15,  6,  7,  9,  8,
-	    7, 6,   8, 13, 11,  9,  7, 15,  7, 12, 15,  9, 11,  7, 13, 12,
-	    11, 13,  6,  7, 14,  9, 13, 15, 14,  8, 13,  6,  5, 12,  7,  5,
-	      11, 12, 14, 15, 14, 15,  9,  8,  9, 14,  5,  6,  8,  6,  5, 12,
-	    9, 15,  5, 11,  6,  8, 13, 12,  5, 12, 13, 14, 11,  8,  5,  6 ];
-	var sr = [
-	    8,  9,  9, 11, 13, 15, 15,  5,  7,  7,  8, 11, 14, 14, 12,  6,
-	    9, 13, 15,  7, 12,  8,  9, 11,  7,  7, 12,  7,  6, 15, 13, 11,
-	    9,  7, 15, 11,  8,  6,  6, 14, 12, 13,  5, 14, 13, 13,  7,  5,
-	    15,  5,  8, 11, 14, 14,  6, 14,  6,  9, 12,  9, 12,  5, 15,  8,
-	    8,  5, 12,  9, 12,  5, 14,  6,  8, 13,  6,  5, 15, 13, 11, 11 ];
-
-	var hl =  [ 0x00000000, 0x5A827999, 0x6ED9EBA1, 0x8F1BBCDC, 0xA953FD4E];
-	var hr =  [ 0x50A28BE6, 0x5C4DD124, 0x6D703EF3, 0x7A6D76E9, 0x00000000];
-
-	var bytesToWords = function (bytes) {
-	  var words = [];
-	  for (var i = 0, b = 0; i < bytes.length; i++, b += 8) {
-	    words[b >>> 5] |= bytes[i] << (24 - b % 32);
-	  }
-	  return words;
-	};
-
-	var wordsToBytes = function (words) {
-	  var bytes = [];
-	  for (var b = 0; b < words.length * 32; b += 8) {
-	    bytes.push((words[b >>> 5] >>> (24 - b % 32)) & 0xFF);
-	  }
-	  return bytes;
-	};
-
-	var processBlock = function (H, M, offset) {
-
-	  // Swap endian
-	  for (var i = 0; i < 16; i++) {
-	    var offset_i = offset + i;
-	    var M_offset_i = M[offset_i];
-
-	    // Swap
-	    M[offset_i] = (
-	        (((M_offset_i << 8)  | (M_offset_i >>> 24)) & 0x00ff00ff) |
-	        (((M_offset_i << 24) | (M_offset_i >>> 8))  & 0xff00ff00)
-	    );
-	  }
-
-	  // Working variables
-	  var al, bl, cl, dl, el;
-	  var ar, br, cr, dr, er;
-
-	  ar = al = H[0];
-	  br = bl = H[1];
-	  cr = cl = H[2];
-	  dr = dl = H[3];
-	  er = el = H[4];
-	  // Computation
-	  var t;
-	  for (var i = 0; i < 80; i += 1) {
-	    t = (al +  M[offset+zl[i]])|0;
-	    if (i<16){
-	        t +=  f1(bl,cl,dl) + hl[0];
-	    } else if (i<32) {
-	        t +=  f2(bl,cl,dl) + hl[1];
-	    } else if (i<48) {
-	        t +=  f3(bl,cl,dl) + hl[2];
-	    } else if (i<64) {
-	        t +=  f4(bl,cl,dl) + hl[3];
-	    } else {// if (i<80) {
-	        t +=  f5(bl,cl,dl) + hl[4];
-	    }
-	    t = t|0;
-	    t =  rotl(t,sl[i]);
-	    t = (t+el)|0;
-	    al = el;
-	    el = dl;
-	    dl = rotl(cl, 10);
-	    cl = bl;
-	    bl = t;
-
-	    t = (ar + M[offset+zr[i]])|0;
-	    if (i<16){
-	        t +=  f5(br,cr,dr) + hr[0];
-	    } else if (i<32) {
-	        t +=  f4(br,cr,dr) + hr[1];
-	    } else if (i<48) {
-	        t +=  f3(br,cr,dr) + hr[2];
-	    } else if (i<64) {
-	        t +=  f2(br,cr,dr) + hr[3];
-	    } else {// if (i<80) {
-	        t +=  f1(br,cr,dr) + hr[4];
-	    }
-	    t = t|0;
-	    t =  rotl(t,sr[i]) ;
-	    t = (t+er)|0;
-	    ar = er;
-	    er = dr;
-	    dr = rotl(cr, 10);
-	    cr = br;
-	    br = t;
-	  }
-	  // Intermediate hash value
-	  t    = (H[1] + cl + dr)|0;
-	  H[1] = (H[2] + dl + er)|0;
-	  H[2] = (H[3] + el + ar)|0;
-	  H[3] = (H[4] + al + br)|0;
-	  H[4] = (H[0] + bl + cr)|0;
-	  H[0] =  t;
-	};
-
-	function f1(x, y, z) {
-	  return ((x) ^ (y) ^ (z));
-	}
-
-	function f2(x, y, z) {
-	  return (((x)&(y)) | ((~x)&(z)));
-	}
-
-	function f3(x, y, z) {
-	  return (((x) | (~(y))) ^ (z));
-	}
-
-	function f4(x, y, z) {
-	  return (((x) & (z)) | ((y)&(~(z))));
-	}
-
-	function f5(x, y, z) {
-	  return ((x) ^ ((y) |(~(z))));
-	}
-
-	function rotl(x,n) {
-	  return (x<<n) | (x>>>(32-n));
-	}
-
-	function ripemd160(message) {
-	  var H = [0x67452301, 0xEFCDAB89, 0x98BADCFE, 0x10325476, 0xC3D2E1F0];
-
-	  if (typeof message == 'string')
-	    message = new Buffer(message, 'utf8');
-
-	  var m = bytesToWords(message);
-
-	  var nBitsLeft = message.length * 8;
-	  var nBitsTotal = message.length * 8;
-
-	  // Add padding
-	  m[nBitsLeft >>> 5] |= 0x80 << (24 - nBitsLeft % 32);
-	  m[(((nBitsLeft + 64) >>> 9) << 4) + 14] = (
-	      (((nBitsTotal << 8)  | (nBitsTotal >>> 24)) & 0x00ff00ff) |
-	      (((nBitsTotal << 24) | (nBitsTotal >>> 8))  & 0xff00ff00)
-	  );
-
-	  for (var i=0 ; i<m.length; i += 16) {
-	    processBlock(H, m, i);
-	  }
-
-	  // Swap endian
-	  for (var i = 0; i < 5; i++) {
-	      // Shortcut
-	    var H_i = H[i];
-
-	    // Swap
-	    H[i] = (((H_i << 8)  | (H_i >>> 24)) & 0x00ff00ff) |
-	          (((H_i << 24) | (H_i >>> 8))  & 0xff00ff00);
-	  }
-
-	  var digestbytes = wordsToBytes(H);
-	  return new Buffer(digestbytes);
-	}
-
-
-	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(39).Buffer))
-
-/***/ },
-/* 72 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var u = __webpack_require__(78)
+	var u = __webpack_require__(77)
 	var write = u.write
 	var fill = u.zeroFill
 
@@ -23882,7 +23684,7 @@ var stellar =
 
 
 /***/ },
-/* 73 */
+/* 72 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -24047,7 +23849,7 @@ var stellar =
 
 
 /***/ },
-/* 74 */
+/* 73 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -24062,7 +23864,7 @@ var stellar =
 	var inherits = __webpack_require__(36).inherits
 	var BE       = false
 	var LE       = true
-	var u        = __webpack_require__(78)
+	var u        = __webpack_require__(77)
 
 	module.exports = function (Buffer, Hash) {
 
@@ -24216,14 +24018,14 @@ var stellar =
 
 
 /***/ },
-/* 75 */
+/* 74 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function() { throw new Error("define cannot be used indirect"); };
 
 
 /***/ },
-/* 76 */
+/* 75 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(module) {
@@ -24239,7 +24041,7 @@ var stellar =
 
 
 /***/ },
-/* 77 */
+/* 76 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer) {/*!
@@ -24249,8 +24051,8 @@ var stellar =
 	 * @license  MIT
 	 */
 
-	var base64 = __webpack_require__(80)
-	var ieee754 = __webpack_require__(79)
+	var base64 = __webpack_require__(79)
+	var ieee754 = __webpack_require__(78)
 
 	exports.Buffer = Buffer
 	exports.SlowBuffer = Buffer
@@ -25402,7 +25204,7 @@ var stellar =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(39).Buffer))
 
 /***/ },
-/* 78 */
+/* 77 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports.write = write
@@ -25444,7 +25246,7 @@ var stellar =
 
 
 /***/ },
-/* 79 */
+/* 78 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports.read = function(buffer, offset, isLE, mLen, nBytes) {
@@ -25534,7 +25336,7 @@ var stellar =
 
 
 /***/ },
-/* 80 */
+/* 79 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
@@ -25551,12 +25353,16 @@ var stellar =
 		var NUMBER = '0'.charCodeAt(0)
 		var LOWER  = 'a'.charCodeAt(0)
 		var UPPER  = 'A'.charCodeAt(0)
+		var PLUS_URL_SAFE = '-'.charCodeAt(0)
+		var SLASH_URL_SAFE = '_'.charCodeAt(0)
 
 		function decode (elt) {
 			var code = elt.charCodeAt(0)
-			if (code === PLUS)
+			if (code === PLUS ||
+			    code === PLUS_URL_SAFE)
 				return 62 // '+'
-			if (code === SLASH)
+			if (code === SLASH ||
+			    code === SLASH_URL_SAFE)
 				return 63 // '/'
 			if (code < NUMBER)
 				return -1 //no match

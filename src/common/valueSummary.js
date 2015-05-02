@@ -22,17 +22,17 @@ var ValueSummary = function (options) {
     .attr("transform", "translate(" + (radius+margin.left) + "," + (radius+margin.top) + ")");
 
   var toggle = outer.append("label").attr("class","strToggle");
-  var hideSTR = true;
+  var hideXPR = true;
     
     toggle.append("input").attr("type", "checkbox")
-      .property("checked", !hideSTR)
+      .property("checked", !hideXPR)
       .on('click', function(){
-        hideSTR = !d3.select(this).property("checked");
+        hideXPR = !d3.select(this).property("checked");
         self.load(null, exchange, true);
       });
       
     toggle.append("b");  
-    toggle.append("span").html("include STR");  
+    toggle.append("span").html("include XPR");  
      
   //var color  = d3.scale.category20();
   var color = function (d) {
@@ -44,7 +44,7 @@ var ValueSummary = function (options) {
     }
     
     var colors = {
-      'STR'     : '#346aa9',
+      'XPR'     : '#346aa9',
       'USD'     : [20,150,30],
       'BTC'     : [240,150,50],
       'EUR'     : [220,210,50],
@@ -78,7 +78,7 @@ var ValueSummary = function (options) {
   var path          = chart.selectAll("path");    
   var tooltip       = outer.append("div").attr("class","tooltip"); 
   var transitioning = false;
-  var gateways      = stellar.currencyDropdown();
+  var gateways      = payshares.currencyDropdown();
   var exchange, current, total;
   var data = [];
    
@@ -104,37 +104,37 @@ var ValueSummary = function (options) {
     transitioning = true;
     exchange      = ex;
         
-    //check for STR, set the percentages
-    var STRObj, currencies = {};
+    //check for XPR, set the percentages
+    var XPRObj, currencies = {};
     data.forEach(function(d) {
-      if (d.currency=='STR') STRObj = d;   
+      if (d.currency=='XPR') XPRObj = d;   
       
       d.percent = total ? d.convertedAmount/total*100 : 0.00;
     });
     
-    //STR wont be present for trade volume, so add it at 0
-    if (!STRObj) data.push({currency:'STR', convertedAmount:0.0});     
+    //XPR wont be present for trade volume, so add it at 0
+    if (!XPRObj) data.push({currency:'XPR', convertedAmount:0.0});     
     
-    //if the STR toggle is active and STR should be hidden
-    //adjust the total, set the STR amount to 0, and
+    //if the XPR toggle is active and XPR should be hidden
+    //adjust the total, set the XPR amount to 0, and
     //recalculate the percentages
-    else if (strToggle && hideSTR) {
-      var adjusted = total - STRObj.amount;
+    else if (strToggle && hideXPR) {
+      var adjusted = total - XPRObj.amount;
       data.forEach(function(d){
-        if (d.currency=='STR') d.convertedAmount = 0;  
+        if (d.currency=='XPR') d.convertedAmount = 0;  
         d.percent = adjusted ? d.convertedAmount/adjusted*100 : 0.00;        
       });
 
     //otherwise, reset the converted amount and set percentage
     } else {
-      STRObj.convertedAmount = STRObj.amount || 0.0;
-      STRObj.percent = total ? STRObj.amount/total*100 : 0.00;
+      XPRObj.convertedAmount = XPRObj.amount || 0.0;
+      XPRObj.percent = total ? XPRObj.amount/total*100 : 0.00;
     }
     
     //sort by issuer, reversed
     data.sort(function(a, b){
-      var i1 = a.base ? a.base.currency+a.base.issuer : a.currency+a.issuer || "Z"; //make STR first
-      var i2 = b.base ? b.base.currency+b.base.issuer : b.currency+b.issuer || "Z"; //make STR first
+      var i1 = a.base ? a.base.currency+a.base.issuer : a.currency+a.issuer || "Z"; //make XPR first
+      var i2 = b.base ? b.base.currency+b.base.issuer : b.currency+b.issuer || "Z"; //make XPR first
       return i2 ? i2.localeCompare(i1) : 0;
     });
     

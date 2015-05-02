@@ -7,7 +7,7 @@
  *  id        : id of element that will contain the chart. if not specified, the chart will be appended the body
  *  bodyTheme : true/false - setting true will apply the chart theme to the entire document, defaults to false
  *  customCSS : true/false - disables the default styling
- *  apiURL    : custom url for the API backend, defaults to charts.stellar.org API
+ *  apiURL    : custom url for the API backend, defaults to charts.payshares.org API
  *  width     : width of chart
  *  height    : height of chart
  *  margin    : e.g. "{top:50,bottom:50,left:50,right:50}" - axis labels are drawn in the margin
@@ -99,7 +99,7 @@ var PriceChartWidget = function (options) {
     
     var params = getParams();
     
-    if (!params.base)    params.base    = {currency:"STR", issuer:""};
+    if (!params.base)    params.base    = {currency:"XPR", issuer:""};
     if (!params.counter) params.counter = {currency:"USD", issuer:"gs9HHU3pmkKBuvykhNm6xiK1JKrput9i3K"}; 
     if (!params.type)    params.type    = "line";
     if (!params.theme)   params.theme   = "light"; 

@@ -76,8 +76,8 @@ var OrderBook = function (options) {
     options.trade   = trade;
     lineData        = [];
     self.offers     = {};
-    baseCurrency    = stellar.Currency.from_json(base.currency).to_human();
-    counterCurrency = stellar.Currency.from_json(trade.currency).to_human();
+    baseCurrency    = payshares.Currency.from_json(base.currency).to_human();
+    counterCurrency = payshares.Currency.from_json(trade.currency).to_human();
     
     bookTables.transition().style("opacity", 0.5);
     fadeChart();
@@ -120,7 +120,7 @@ var OrderBook = function (options) {
   }
 
 
-//handle data returned from stellar-lib
+//handle data returned from payshares-lib
   function handleBook (data,action) {
     var max_rows = options.max_rows || 100,
       rowCount   = 0,
@@ -215,7 +215,7 @@ var OrderBook = function (options) {
   
     loader = chart.append("img")
       .attr("class", "loader")
-      .attr("src", "assets/images/stellarThrobber.png")
+      .attr("src", "assets/images/paysharesThrobber.png")
       .style("opacity", 0); 
       
     if (isLoading) {
@@ -225,7 +225,7 @@ var OrderBook = function (options) {
   }
 
 
-//draw the chart data loaded from stellar-lib  
+//draw the chart data loaded from payshares-lib  
   function drawData () {
     if (!self.offers.bids || !self.offers.asks) return; //wait for both to load
     if (!self.offers.bids.length || !self.offers.asks.length) {

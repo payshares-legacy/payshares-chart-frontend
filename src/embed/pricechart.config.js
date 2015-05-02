@@ -6,12 +6,12 @@ module.exports = {
   files: {
 
     html: "src/embed/pricechart.html",
-    loader: 'src/assets/images/stellarThrobber.png',
+    loader: 'src/assets/images/paysharesThrobber.png',
     
     js: [  
       'bower_components/moment/moment.js',
       'bower_components/d3/d3.js',
-      'deps/stellar-lib.js',
+      'deps/payshares-lib.js',
       'src/common/apiHandler.js',
       'src/common/priceChart.js',
       'src/embed/pricechart-script.js' 

@@ -50,7 +50,7 @@ var LineChart = function (options){
   
     loader = div.append("img")
       .attr("class", "loader")
-      .attr("src", "assets/images/stellarThrobber.png");
+      .attr("src", "assets/images/paysharesThrobber.png");
     
     if (!self.loading) loader.style("opacity",0);
   }	

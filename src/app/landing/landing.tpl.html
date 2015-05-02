@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-6 stats">
         <h5>
-          Stellar Network Stats
+          Payshares Network Stats
           <select id="valueCurrency" class="valueCurrencySelect"></select>
           <span class="valueRateDisplay" ng-bind="valueRateDisplay"></span>
         </h5> 
@@ -12,7 +12,7 @@
             <label>Total Network Value:</label>
             <div class="stat">
               <span ng-show="valueRate" ng-bind="totalNetworkValue"></span>
-              <img  ng-hide="totalNetworkValue" src="assets/images/stellarThrobber.png" class="loader"/>
+              <img  ng-hide="totalNetworkValue" src="assets/images/paysharesThrobber.png" class="loader"/>
               <span ng-show="totalNetworkValue && totalNetworkValue != ' '" ng-click="metricDetail='totalNetworkValue'" class="details" ng-class="{selected : metricDetail == 'totalNetworkValue' }">
                 Detail
                 <img src="assets/images/triangle.svg"/>
@@ -23,7 +23,7 @@
             <label>24 hr Transaction Volume:</label>
             <div class="stat">
               <span ng-show="valueRate" ng-bind="transactionVolume"></span>
-              <img  ng-hide="transactionVolume" src="assets/images/stellarThrobber.png" class="loader"/>
+              <img  ng-hide="transactionVolume" src="assets/images/paysharesThrobber.png" class="loader"/>
               <span ng-show="transactionVolume && transactionVolume != ' '" ng-click="metricDetail='transactionVolume'" class="details" ng-class="{selected : metricDetail == 'transactionVolume' }">
                 Detail
                 <img src="assets/images/triangle.svg"/>
@@ -34,7 +34,7 @@
             <label>24 hr Trade Volume:</label>
             <div class="stat">
               <span ng-show="valueRate" ng-bind="tradeVolume"></span>
-              <img  ng-hide="tradeVolume" src="assets/images/stellarThrobber.png" class="loader"/>
+              <img  ng-hide="tradeVolume" src="assets/images/paysharesThrobber.png" class="loader"/>
               <span ng-show="tradeVolume && tradeVolume != ' '" ng-click="metricDetail='tradeVolume'" class="details" ng-class="{selected : metricDetail == 'tradeVolume' }">
                 Detail
                 <img src="assets/images/triangle.svg"/>
@@ -42,25 +42,25 @@
             </div>
           </li>          
           <li>
-            <label>Total STR:</label>
+            <label>Total XPR:</label>
             <div class="stat">
               <span ng-bind="totalCoins"></span>
-              <small ng-show="totalCoins">STR</small>
-              <img ng-hide="totalCoins" src="assets/images/stellarThrobber.png" class="loader"/>
+              <small ng-show="totalCoins">XPR</small>
+              <img ng-hide="totalCoins" src="assets/images/paysharesThrobber.png" class="loader"/>
             </div>
           </li>
           <li>
             <label>Ledger #:</label>
             <div class="stat">
               <span ng-bind="ledgerIndex"></span>
-              <img ng-hide="ledgerIndex" src="assets/images/stellarThrobber.png" class="loader"/>
+              <img ng-hide="ledgerIndex" src="assets/images/paysharesThrobber.png" class="loader"/>
             </div>
           </li> 
           <li>
-            <label># of Stellar accounts:</label>
+            <label># of Payshares accounts:</label>
             <div class="stat">
               <span ng-bind="totalAccounts"></span>
-              <img ng-hide="totalAccounts" src="assets/images/stellarThrobber.png" class="loader"/>
+              <img ng-hide="totalAccounts" src="assets/images/paysharesThrobber.png" class="loader"/>
             </div>
           </li>  
         </ul>

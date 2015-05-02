@@ -1,4 +1,4 @@
-angular.module( 'stellarcharts.markets', [
+angular.module( 'paysharescharts.markets', [
   'ui.state',
   'ui.bootstrap',
   'ui.route'
@@ -46,7 +46,7 @@ angular.module( 'stellarcharts.markets', [
   
 //load settings from session, local storage, options, or defaults  
   $scope.base  = store.session.get('base') || store.get('base') || 
-    Options.base || {currency:"STR", issuer:""};
+    Options.base || {currency:"XPR", issuer:""};
   
   $scope.trade = store.session.get('trade') || store.get('trade') || 
     Options.trade || {currency:"BTC", issuer:"gPwGQjiEZRy9k81qcFExHYvJ5Wf4qTna1c"};
@@ -59,13 +59,13 @@ angular.module( 'stellarcharts.markets', [
 
 //set up the currency pair dropdowns
   var loaded  = false, 
-    dropdownB = stellar.currencyDropdown().selected($scope.trade)
+    dropdownB = payshares.currencyDropdown().selected($scope.trade)
       .on("change", function(d) {
         if (loaded) {
           $scope.trade = d;
           loadPair();
         }}),
-    dropdownA = stellar.currencyDropdown().selected($scope.base)
+    dropdownA = payshares.currencyDropdown().selected($scope.base)
       .on("change", function(d) {
         if (loaded) {
           $scope.base = d;

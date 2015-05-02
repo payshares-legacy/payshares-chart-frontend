@@ -6,22 +6,22 @@ var Remote,
 if (typeof require != 'undefined') {
 
   /* Loading with Node.js */
-  var Remote = require('stellar-lib').Remote,
-    Amount = require('stellar-lib').Amount,
+  var Remote = require('payshares-lib').Remote,
+    Amount = require('payshares-lib').Amount,
     moment = require('moment'),
     gateways = require('./gateways.json');
 
-} else if (stellar && moment) {
+} else if (payshares && moment) {
 
   /* Loading in a webpage */
-  Remote = stellar.Remote;
-  Amount = stellar.Amount;
+  Remote = payshares.Remote;
+  Amount = payshares.Amount;
 
   // Note: also be sure to load momentjs and gateways.json before loading this file
 
 } else {
 
-  throw (new Error('Error: cannot load offersExercisedListener without stellar-lib, momentjs, and gateways.json'));
+  throw (new Error('Error: cannot load offersExercisedListener without payshares-lib, momentjs, and gateways.json'));
 
 }
 
@@ -56,7 +56,7 @@ if (typeof require != 'undefined') {
  *
  *  Available options include:
  *  {
- *    base: {currency: "STR"},
+ *    base: {currency: "XPR"},
  *    trade: {currency: "USD", issuer: "gDSSa75HPagWcvQmwH7D51dT5DPmvsKL4q"},
  *    
  *    reduce: true/false, // optional, defaults to false if timeIncrement is not set
@@ -70,14 +70,14 @@ if (typeof require != 'undefined') {
  */
 function OffersExercisedListener(opts, displayFn) {
 
-  // Connect to stellar-lib
+  // Connect to payshares-lib
   if (remote) {
     remote = remote;
   } else {
     remote = new Remote({
         // trace: true,
         servers: [{
-            host: 'live.stellar.org',
+            host: 'live.payshares.org',
             port: 9001
         }]
     });
@@ -347,7 +347,7 @@ function offersExercisedMap(doc, emit) {
                 payCurr = [node.PreviousFields.TakerPays.currency, node.PreviousFields.TakerPays.issuer];
                 payAmnt = node.PreviousFields.TakerPays.value - node.FinalFields.TakerPays.value;
             } else {
-                payCurr = ["STR"];
+                payCurr = ["XPR"];
                 payAmnt = (node.PreviousFields.TakerPays - node.FinalFields.TakerPays) / 1000000.0; // convert from drops
                 exchangeRate = exchangeRate / 1000000.0;
             }
@@ -356,7 +356,7 @@ function offersExercisedMap(doc, emit) {
                 getCurr = [node.PreviousFields.TakerGets.currency, node.PreviousFields.TakerGets.issuer];
                 getAmnt = node.PreviousFields.TakerGets.value - node.FinalFields.TakerGets.value;
             } else {
-                getCurr = ["STR"];
+                getCurr = ["XPR"];
                 getAmnt = (node.PreviousFields.TakerGets - node.FinalFields.TakerGets) / 1000000.0;
                 exchangeRate = exchangeRate * 1000000.0;
             }

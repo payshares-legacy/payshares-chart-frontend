@@ -34,7 +34,7 @@ for (var cur in CURRENCIES) {
 // State variables
 var waiting = true;
 var isBlank = true;
-var measureCurrency = "STR";
+var measureCurrency = "XPR";
 var measureIssuer;
 var distinction = "issuer";
 var monthsPast = 0;
@@ -80,7 +80,7 @@ function changeRange(that) {
 function changeCurrency(that) {
   var cur = $(that).val();
   measureCurrency = cur;
-  if (cur === "STR") {
+  if (cur === "XPR") {
     $("#gatewaySelector").addClass("invisible");
   } else {
     var currentGateway = $("#gatewaySelector").val();
@@ -410,7 +410,7 @@ function prepareData(response) {
 }
 
 function distinguishData(preparedData, distinction, currency, issuer) {
-  currency = currency || "STR";
+  currency = currency || "XPR";
   var oldHeading = preparedData.heading;
   var oldSeries = preparedData.series;
   var newHeading = [];
@@ -430,13 +430,13 @@ function distinguishData(preparedData, distinction, currency, issuer) {
       key = oldHeading[j][distinction];
       var rateKey = oldHeading[j].currency + ":" + oldHeading[j].issuer;
       var rate = currentXrpRates[rateKey] || 0;
-      if (currency !== "STR") {
+      if (currency !== "XPR") {
         var conversionKey = currency + ":" + issuer;
         var conversion = currentXrpRates[conversionKey];
         if (conversion) {
           rate /= conversion;
         } else {
-          console.log("ERROR: No exchange rate found; defaulting to STR");
+          console.log("ERROR: No exchange rate found; defaulting to XPR");
         }
       }
       var point = entry[j] * rate; //Apply exchange rate here
@@ -488,7 +488,7 @@ function distinguishData(preparedData, distinction, currency, issuer) {
 var numberOfCurrenciesAsked = CURRENCIES_LIST.length;
 for (var i=0; i<CURRENCIES_LIST.length; i++) {
   cur = CURRENCIES_LIST[i];
-  $.post("http://ct.stellar.com:5993/api/exchangeRates",{currencies: [cur,'STR'], gateways: GATEWAYS_LIST}, recordRate);
+  $.post("http://ct.payshares.com:5993/api/exchangeRates",{currencies: [cur,'XPR'], gateways: GATEWAYS_LIST}, recordRate);
 }
 var numberOfCurrenciesAnswered = 0;
 
@@ -496,9 +496,9 @@ function recordRate(response) {
   numberOfCurrenciesAnswered++;
   for (var i=0; i<response.length; i++) {
     var exchange = response[i];
-    if (exchange.base.currency === "STR") {
+    if (exchange.base.currency === "XPR") {
       var key = exchange.trade.currency + ":" + exchange.trade.issuer;
-      currentXrpRates[key] = 1/exchange.rate; //I.e. how many STR is this worth?
+      currentXrpRates[key] = 1/exchange.rate; //I.e. how many XPR is this worth?
     }
   }
 }
@@ -517,7 +517,7 @@ function requestData(monthsPast) {
     }
     
     var increment = {0:"months", 12:"weeks", 6:"weeks", 2:"days", 1:"hours"}[monthsPast];
-    $.post("http://ct.stellar.com:5993/api/gatewayCapitalization",
+    $.post("http://ct.payshares.com:5993/api/gatewayCapitalization",
     {currencies: CURRENCIES_LIST, gateways: GATEWAYS_LIST, timeIncrement: increment, startTime: startTime},
     function(response) {
       preparedData = prepareData(response);

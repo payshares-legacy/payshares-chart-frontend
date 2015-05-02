@@ -1,4 +1,4 @@
-angular.module( 'stellarcharts.activeAccounts', [
+angular.module( 'paysharescharts.activeAccounts', [
   'ui.state',
   'ui.bootstrap'
 ])
@@ -19,7 +19,7 @@ angular.module( 'stellarcharts.activeAccounts', [
 .controller( 'ActiveAccountsCtrl', function ActiveAccountsCtrl( $scope ) {
 
   var base    = store.session.get('traderBase')    || store.get('traderBase')    || {"currency": "USD", "issuer" : "gs9HHU3pmkKBuvykhNm6xiK1JKrput9i3K"};
-  var counter = store.session.get('traderCounter') || store.get('traderCounter') || {"currency": "STR"};
+  var counter = store.session.get('traderCounter') || store.get('traderCounter') || {"currency": "XPR"};
   var period  = store.session.get('traderPeriod')  || store.get('traderPeriod')  || "24h";
   var metric  = store.session.get('traderMetric')  || store.get('traderMetric')  || "volume";
    
@@ -33,13 +33,13 @@ angular.module( 'stellarcharts.activeAccounts', [
 
 //set up the currency pair dropdowns
   var loaded  = false, 
-    dropdownB = stellar.currencyDropdown().selected(counter)
+    dropdownB = payshares.currencyDropdown().selected(counter)
       .on("change", function(d) {
         if (loaded) {
           counter = d;
           loadPair();
         }}),
-    dropdownA = stellar.currencyDropdown().selected(base)
+    dropdownA = payshares.currencyDropdown().selected(base)
       .on("change", function(d) {
         if (loaded) {
           base = d;

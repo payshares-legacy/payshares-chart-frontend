@@ -5,7 +5,7 @@
  * automatically.
  */
 describe( 'main section', function() {
-  beforeEach( module( 'stellarcharts.landing' ) );
+  beforeEach( module( 'paysharescharts.landing' ) );
 
   it( 'should have a dummy test', inject( function() {
     expect( true ).toBeTruthy();

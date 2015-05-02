@@ -24,7 +24,7 @@ var TransactionFeed = function (options) {
    
   self.div = d3.select('#'+options.id).attr('class','transactionFeed');
 
-//process incoming transaction from stellar-lib     
+//process incoming transaction from payshares-lib     
   this.handleTransaction = function (data) {
     if (data.engine_result !== 'tesSUCCESS') return;
     addTransaction(data.transaction);
@@ -100,7 +100,7 @@ var TransactionFeed = function (options) {
         row.currency1 = row.amount1.currency;
         row.amount1   = row.amount1.value;
       } else {
-        row.currency1 = "STR";
+        row.currency1 = "XPR";
         row.amount1   = row.amount1/1000000;
       }
     }
@@ -109,7 +109,7 @@ var TransactionFeed = function (options) {
         row.currency2 = row.amount2.currency;
         row.amount2   = row.amount2.value;
       } else {
-        row.currency2 = "STR";
+        row.currency2 = "XPR";
         row.amount2   = row.amount2/1000000;
       }
     }

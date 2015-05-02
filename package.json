@@ -1,8 +1,8 @@
 {
   "author": "Ripple Labs, Inc.",
-  "name": "stellarcharts",
+  "name": "paysharescharts",
   "version": "0.0.1",
-  "homepage": "http://stellar.org",
+  "homepage": "http://payshares.co",
   "licenses": {
     "type": "ISC",
     "url": ""

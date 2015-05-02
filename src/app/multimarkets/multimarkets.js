@@ -1,4 +1,4 @@
-angular.module( 'stellarcharts.multimarkets', [
+angular.module( 'paysharescharts.multimarkets', [
   'ui.state',
   'ui.bootstrap'
 ])
@@ -21,14 +21,14 @@ angular.module( 'stellarcharts.multimarkets', [
     store.get('multimarkets') || 
     Options.multimarkets || [
     {
-      base    : {currency:"STR"},
+      base    : {currency:"XPR"},
       counter : {currency:"USD",issuer:"gDSSa75HPagWcvQmwH7D51dT5DPmvsKL4q"}},
     {
-      base    : {currency:"STR"},
+      base    : {currency:"XPR"},
       counter : {currency:"CNY",issuer:"rnuF96W4SZoCJmbHYBFoJZpR8eCaxNvekK"}},
     {
       base    : {currency:"BTC",issuer:"gDSSa75HPagWcvQmwH7D51dT5DPmvsKL4q"},
-      counter : {currency:"STR"}}
+      counter : {currency:"XPR"}}
     ];
     
     

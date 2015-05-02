@@ -1,15 +1,15 @@
 
 angular.element(document).ready(function() {
-  angular.module( 'stellarcharts', [
+  angular.module( 'paysharescharts', [
     'templates-app',
     'templates-common',
-    'stellarcharts.landing',
-    'stellarcharts.markets',
-    'stellarcharts.multimarkets',
-    'stellarcharts.activeAccounts',
-    'stellarcharts.graph',
-    'stellarcharts.accounts',
-    'stellarcharts.value',
+    'paysharescharts.landing',
+    'paysharescharts.markets',
+    'paysharescharts.multimarkets',
+    'paysharescharts.activeAccounts',
+    'paysharescharts.graph',
+    'paysharescharts.accounts',
+    'paysharescharts.value',
     'ui.state',
     'ui.route',
     'snap'
@@ -52,13 +52,13 @@ angular.element(document).ready(function() {
       mixpanel.track("Page", {"Page Name":toState.name, "Theme":$scope.theme});
       
       if ( angular.isDefined( toState.data.pageTitle ) ) 
-           $scope.pageTitle = toState.data.pageTitle + ' | Stellar Charts' ;
-      else $scope.pageTitle = "Stellar Charts"
+           $scope.pageTitle = toState.data.pageTitle + ' | Payshares Charts' ;
+      else $scope.pageTitle = "Payshares Charts"
       
     });
     
-  //connect to the stellar network;
-    remote = new stellar.Remote(Options.stellar);
+  //connect to the payshares network;
+    remote = new payshares.Remote(Options.payshares);
     remote.connect();  
       
   //get ledger number and total coins  
@@ -105,12 +105,12 @@ angular.element(document).ready(function() {
   d3.json("assets/gateways.json", function(error, data) {
     gateways = data;
 
-    //2nd connection needed for now because of a bug in stellar-lib 
+    //2nd connection needed for now because of a bug in payshares-lib 
     //when unsubscribing from an orderbook.
-    orderBookRemote = new stellar.Remote(Options.stellar);
+    orderBookRemote = new payshares.Remote(Options.payshares);
     orderBookRemote.connect();
         
-    angular.bootstrap(document, ['stellarcharts']);
+    angular.bootstrap(document, ['paysharescharts']);
 
 /*
     api = new ApiHandler("http://localhost:5993/api");
