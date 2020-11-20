@@ -13,7 +13,7 @@ Options = {
     trusted : false,
 
     servers: [
-      { host: 'live.payshares.co', port: 5015, secure: true }
+      { host: 'live.payshares.org', port: 5015, secure: true }
     ],
 
     connection_offset: 0
