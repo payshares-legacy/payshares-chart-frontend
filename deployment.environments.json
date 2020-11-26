@@ -1,6 +1,6 @@
 {
   "development": {
-    "api"         : "https://api.payshares.org",
+    "api"         : "https://data.payshares.org/api",
     "domain"      : "https://charts.payshares.org",
     "maintenance" : false
   },
@@ -11,7 +11,7 @@
   },
   
   "production": {
-    "api"         : "https://api.payshares.org",
+    "api"         : "https://data.payshares.org/api",
     "domain"      : "https://charts.payshares.org"
   }
 }
