@@ -4,7 +4,7 @@ This is the frontend for charts.payshares.org data visualization using angular.j
 
 [![Build Status](https://travis-ci.org/Payshares/payshares-chart-frontend.svg?branch=master)](https://travis-ci.org/Payshares/payshares-chart-frontend)
 
-##Installation Instructions:
+## Installation Instructions:
 
 1. Install [node.js and npm](http://nodejs.org/).
 2. Install [bower](http://bower.io/)
