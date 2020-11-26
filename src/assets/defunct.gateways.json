@@ -2,7 +2,7 @@
     {
         "name": "Justcoin",
         "accounts": [{
-            "address": "gnhPFpbYXcYGMkGxfWdQGFfuKEdJoEThVo",
+            "address": "x481ZDzTxWSybpWNxGcyTPF2WjiLjAqBut",
             "currencies": ["BTC", "LTC", "NOK", "EUR", "XRP"],
             "hotwallets": []
             }]
