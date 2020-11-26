@@ -3,7 +3,7 @@
         "name": "OneCred",
         "accounts":
         [{
-            "address": "gPwGQjiEZRy9k81qcFExHYvJ5Wf4qTna1c",
+            "address": "x481ZDzTxWSybpWNxGcyTPF2WjiLjAqBut",
             "currencies": ["BTC", "BIT", "XDG"]
         }],
         "hotwallets": []
@@ -12,7 +12,7 @@
         "name": "Coinex",
         "accounts":
         [{
-            "address": "gs9HHU3pmkKBuvykhNm6xiK1JKrput9i3K",
+            "address": "xHnuiZT5GHPKct16Vw6Yc1XEJxjeXp8twW",
             "currencies": ["NZD", "AUD", "USD", "BTC", "XRP", "XHP"]
         }],
         "hotwallets": []
@@ -21,7 +21,7 @@
         "name": "RippleFox",
         "accounts":
         [{
-            "address": "gP1f4UKHbvdNDZPYyjqFHTnaqGzCwyjm5E",
+            "address": "xNreXfour4tREhEBDUeExyCzjTdQSZ5BmQ",
             "currencies": ["CNY"]
         }],
         "hotwallets": []
