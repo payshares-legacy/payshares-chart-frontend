@@ -2,6 +2,8 @@
 
 This is the frontend for charts.payshares.org data visualization using angular.js and D3
 
+[![Build Status](https://travis-ci.org/Payshares/payshares-chart-frontend.svg?branch=master)](https://travis-ci.org/Payshares/payshares-chart-frontend)
+
 ##Installation Instructions:
 
 1. Install [node.js and npm](http://nodejs.org/).
