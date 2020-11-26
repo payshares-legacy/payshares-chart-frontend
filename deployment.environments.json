@@ -1,7 +1,7 @@
 {
   "development": {
-    "api"         : "http://api.payshares.org",
-    "domain"      : "http://charts.payshares.org",
+    "api"         : "https://api.payshares.org",
+    "domain"      : "https://charts.payshares.org",
     "maintenance" : false
   },
   
