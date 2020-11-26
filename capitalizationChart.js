@@ -3,9 +3,9 @@ function CapitalizationChart() {
 
 // Hard-coded constants
 var GATEWAY_NAMES = { // Gateways we're going to look at
-  gPwGQjiEZRy9k81qcFExHYvJ5Wf4qTna1c: "OneCred",
-  gs9HHU3pmkKBuvykhNm6xiK1JKrput9i3K: "Coinex",
-  gP1f4UKHbvdNDZPYyjqFHTnaqGzCwyjm5E: "RippleFox"
+  x481ZDzTxWSybpWNxGcyTPF2WjiLjAqBut: "OneCred",
+  xHnuiZT5GHPKct16Vw6Yc1XEJxjeXp8twW: "Coinex",
+  xNreXfour4tREhEBDUeExyCzjTdQSZ5BmQ: "RippleFox"
 };
 var CURRENCIES_LIST = ["USD", "BTC", "CNY", "NZD", "AUD", "XRP", "XHP", "BIT", "XDG"]; // Currencies we're going to look at
 var GATEWAY_NAME_ABBREVIATIONS = {
