@@ -6,7 +6,7 @@
 Options = {
   theme     : "light",
   base      : {currency:"BTC", issuer:"gDSSa75HPagWcvQmwH7D51dT5DPmvsKL4q"},
-  trade     : {currency:"XPR", issuer:""},
+  trade     : {currency:"XPS", issuer:""},
   chartType : "line",
   interval  : "1h",
  

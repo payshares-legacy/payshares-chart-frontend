@@ -21,14 +21,14 @@ angular.module( 'paysharescharts.multimarkets', [
     store.get('multimarkets') || 
     Options.multimarkets || [
     {
-      base    : {currency:"XPR"},
+      base    : {currency:"XPS"},
       counter : {currency:"USD",issuer:"gDSSa75HPagWcvQmwH7D51dT5DPmvsKL4q"}},
     {
-      base    : {currency:"XPR"},
+      base    : {currency:"XPS"},
       counter : {currency:"CNY",issuer:"rnuF96W4SZoCJmbHYBFoJZpR8eCaxNvekK"}},
     {
       base    : {currency:"BTC",issuer:"gDSSa75HPagWcvQmwH7D51dT5DPmvsKL4q"},
-      counter : {currency:"XPR"}}
+      counter : {currency:"XPS"}}
     ];
     
     

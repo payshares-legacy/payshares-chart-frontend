@@ -22,17 +22,17 @@ var ValueSummary = function (options) {
     .attr("transform", "translate(" + (radius+margin.left) + "," + (radius+margin.top) + ")");
 
   var toggle = outer.append("label").attr("class","strToggle");
-  var hideXPR = true;
+  var hideXPS = true;
     
     toggle.append("input").attr("type", "checkbox")
-      .property("checked", !hideXPR)
+      .property("checked", !hideXPS)
       .on('click', function(){
-        hideXPR = !d3.select(this).property("checked");
+        hideXPS = !d3.select(this).property("checked");
         self.load(null, exchange, true);
       });
       
     toggle.append("b");  
-    toggle.append("span").html("include XPR");  
+    toggle.append("span").html("include XPS");  
      
   //var color  = d3.scale.category20();
   var color = function (d) {
@@ -44,7 +44,7 @@ var ValueSummary = function (options) {
     }
     
     var colors = {
-      'XPR'     : '#346aa9',
+      'XPS'     : '#346aa9',
       'USD'     : [20,150,30],
       'BTC'     : [240,150,50],
       'EUR'     : [220,210,50],
@@ -104,37 +104,37 @@ var ValueSummary = function (options) {
     transitioning = true;
     exchange      = ex;
         
-    //check for XPR, set the percentages
-    var XPRObj, currencies = {};
+    //check for XPS, set the percentages
+    var XPSObj, currencies = {};
     data.forEach(function(d) {
-      if (d.currency=='XPR') XPRObj = d;   
+      if (d.currency=='XPS') XPSObj = d;   
       
       d.percent = total ? d.convertedAmount/total*100 : 0.00;
     });
     
-    //XPR wont be present for trade volume, so add it at 0
-    if (!XPRObj) data.push({currency:'XPR', convertedAmount:0.0});     
+    //XPS wont be present for trade volume, so add it at 0
+    if (!XPSObj) data.push({currency:'XPS', convertedAmount:0.0});     
     
-    //if the XPR toggle is active and XPR should be hidden
-    //adjust the total, set the XPR amount to 0, and
+    //if the XPS toggle is active and XPS should be hidden
+    //adjust the total, set the XPS amount to 0, and
     //recalculate the percentages
-    else if (strToggle && hideXPR) {
-      var adjusted = total - XPRObj.amount;
+    else if (strToggle && hideXPS) {
+      var adjusted = total - XPSObj.amount;
       data.forEach(function(d){
-        if (d.currency=='XPR') d.convertedAmount = 0;  
+        if (d.currency=='XPS') d.convertedAmount = 0;  
         d.percent = adjusted ? d.convertedAmount/adjusted*100 : 0.00;        
       });
 
     //otherwise, reset the converted amount and set percentage
     } else {
-      XPRObj.convertedAmount = XPRObj.amount || 0.0;
-      XPRObj.percent = total ? XPRObj.amount/total*100 : 0.00;
+      XPSObj.convertedAmount = XPSObj.amount || 0.0;
+      XPSObj.percent = total ? XPSObj.amount/total*100 : 0.00;
     }
     
     //sort by issuer, reversed
     data.sort(function(a, b){
-      var i1 = a.base ? a.base.currency+a.base.issuer : a.currency+a.issuer || "Z"; //make XPR first
-      var i2 = b.base ? b.base.currency+b.base.issuer : b.currency+b.issuer || "Z"; //make XPR first
+      var i1 = a.base ? a.base.currency+a.base.issuer : a.currency+a.issuer || "Z"; //make XPS first
+      var i2 = b.base ? b.base.currency+b.base.issuer : b.currency+b.issuer || "Z"; //make XPS first
       return i2 ? i2.localeCompare(i1) : 0;
     });
     

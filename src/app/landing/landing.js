@@ -30,9 +30,9 @@ angular.module( 'paysharescharts.landing', [
   };
   
   var totalAccounts
-  var totalNetworkValueXPR;
-  var transactionVolumeXPR;
-  var tradeVolumeXPR;
+  var totalNetworkValueXPS;
+  var transactionVolumeXPS;
+  var tradeVolumeXPS;
   
   $scope.valueRate;
   $scope.valueCurrency     = "BTC";
@@ -79,23 +79,23 @@ angular.module( 'paysharescharts.landing', [
   
   markets.list([
     {
-      counter : {currency:"XPR"},
+      counter : {currency:"XPS"},
       base    : {currency:"BTC", issuer:"gPwGQjiEZRy9k81qcFExHYvJ5Wf4qTna1c"}
     },
     {
-      counter : {currency:"XPR"},
+      counter : {currency:"XPS"},
       base    : {currency:"BTC", issuer:"gs9HHU3pmkKBuvykhNm6xiK1JKrput9i3K"}
     }, {
-      counter : {currency:'XPR'},
+      counter : {currency:'XPS'},
       base    : {currency:'USD', issuer:'gs9HHU3pmkKBuvykhNm6xiK1JKrput9i3K'}
     }, {
-      counter : {currency:"XPR"},
+      counter : {currency:"XPS"},
       base    : {currency:"CNY", issuer:"gP1f4UKHbvdNDZPYyjqFHTnaqGzCwyjm5E"}
     }, {
-      counter : {currency:'XPR'},
+      counter : {currency:'XPS'},
       base    : {currency:'NZD', issuer:'gs9HHU3pmkKBuvykhNm6xiK1JKrput9i3K'}
     }, {
-      counter : {currency:"XPR"},
+      counter : {currency:"XPS"},
       base    : {currency:"AUD", issuer:"gs9HHU3pmkKBuvykhNm6xiK1JKrput9i3K"}
     }
     ]);
@@ -122,13 +122,13 @@ angular.module( 'paysharescharts.landing', [
     
     if      ($scope.metricDetail == 'totalNetworkValue') {
       $scope.metricDetailTitle = "Total Network Value";
-      donut.load(totalNetworkValueXPR, ex, true);
+      donut.load(totalNetworkValueXPS, ex, true);
     } else if ($scope.metricDetail == 'transactionVolume') {
       $scope.metricDetailTitle = "Transaction Volume (last 24 hours)";
-      donut.load(transactionVolumeXPR, ex);
+      donut.load(transactionVolumeXPS, ex);
     } else if ($scope.metricDetail == 'tradeVolume') {
       $scope.metricDetailTitle = "Trade Volume (last 24 hours)";
-      donut.load(tradeVolumeXPR, ex); 
+      donut.load(tradeVolumeXPS, ex); 
     }
   });
   
@@ -182,20 +182,20 @@ angular.module( 'paysharescharts.landing', [
   if (typeof $scope.valueRate === 'undefined') return;
 
     if (metric=="totalNetworkValue") {
-      if (typeof totalNetworkValueXPR === 'undefined') return;
-      if (metric === $scope.metricDetail) donut.load(totalNetworkValueXPR, ex, true);
-      value     = totalNetworkValueXPR.total/$scope.valueRate; 
+      if (typeof totalNetworkValueXPS === 'undefined') return;
+      if (metric === $scope.metricDetail) donut.load(totalNetworkValueXPS, ex, true);
+      value     = totalNetworkValueXPS.total/$scope.valueRate; 
       precision = 0;
     
     } else if (metric=="transactionVolume") {
-      if (typeof transactionVolumeXPR === 'undefined') return;
-      if (metric === $scope.metricDetail) donut.load(transactionVolumeXPR, ex);
-      value     = transactionVolumeXPR.total/$scope.valueRate;
+      if (typeof transactionVolumeXPS === 'undefined') return;
+      if (metric === $scope.metricDetail) donut.load(transactionVolumeXPS, ex);
+      value     = transactionVolumeXPS.total/$scope.valueRate;
       precision = 2;             
     } else if (metric=="tradeVolume") {
-      if (typeof tradeVolumeXPR === 'undefined') return;      
-      if (metric === $scope.metricDetail) donut.load(tradeVolumeXPR, ex);
-      value     = tradeVolumeXPR.total/$scope.valueRate;     
+      if (typeof tradeVolumeXPS === 'undefined') return;      
+      if (metric === $scope.metricDetail) donut.load(tradeVolumeXPS, ex);
+      value     = tradeVolumeXPS.total/$scope.valueRate;     
       precision = 2;
     } 
     
@@ -204,7 +204,7 @@ angular.module( 'paysharescharts.landing', [
       case "JPY": sign = "¥"; break;
       case "CNY": sign = "¥"; break;
       case "EUR": sign = "€"; break;
-      case "XPR": sign = "";  break;
+      case "XPS": sign = "";  break;
       default   : sign = "";  break;
     }      
       
@@ -229,7 +229,7 @@ angular.module( 'paysharescharts.landing', [
         data = {total:0};
       }
       
-      totalNetworkValueXPR = data;
+      totalNetworkValueXPS = data;
       showValue("totalNetworkValue");          
     });
     
@@ -239,7 +239,7 @@ angular.module( 'paysharescharts.landing', [
         data = {total:0};
       }
       
-      transactionVolumeXPR = data;
+      transactionVolumeXPS = data;
       showValue("transactionVolume");                
     });
     
@@ -249,7 +249,7 @@ angular.module( 'paysharescharts.landing', [
         data = {total:0};
       }
       
-      tradeVolumeXPR = data;
+      tradeVolumeXPS = data;
       showValue("tradeVolume");    
     });
   }
@@ -259,7 +259,7 @@ angular.module( 'paysharescharts.landing', [
   function setValueRate (currency, useCached, callback) {
     var issuer = valueCurrencies[currency];
     
-    if (currency == "XPR") {
+    if (currency == "XPS") {
       $scope.valueRate = 1;
       $scope.valueRateDisplay = "";
       return callback();
@@ -268,7 +268,7 @@ angular.module( 'paysharescharts.landing', [
     //check for cached
     if (useCached && exchangeRates[currency+"."+issuer]) {
       $scope.valueRate = exchangeRates[currency+"."+issuer];
-      $scope.valueRateDisplay = commas(1/$scope.valueRate,4)  + " XPR/"+currency;
+      $scope.valueRateDisplay = commas(1/$scope.valueRate,4)  + " XPS/"+currency;
       return callback();
     }
     
@@ -284,7 +284,7 @@ angular.module( 'paysharescharts.landing', [
       }
             
       $scope.valueRate = exchangeRates[currency+"."+issuer] || 0;
-      if ($scope.valueRate) $scope.valueRateDisplay = commas(1/$scope.valueRate,4) + " XPR/"+currency;
+      if ($scope.valueRate) $scope.valueRateDisplay = commas(1/$scope.valueRate,4) + " XPS/"+currency;
       callback();
     });     
   }
@@ -296,7 +296,7 @@ angular.module( 'paysharescharts.landing', [
     api.exchangeRates({
       pairs:[{
         base    : {currency : c.currency, issuer : c.issuer},
-        counter : {currency:"XPR"}
+        counter : {currency:"XPS"}
       }]
       
     }, function(err, data){

@@ -31,12 +31,12 @@ function CapChart(options) {
   dropdowns.select(".dataType select").on('change',function(){
     self.dataType = this.value;
     if (self.dataType=='Transaction Volume') {
-      dropdowns.select(".currency").insert("option", ":first-child").attr("class", "XPR").text("XPR");  
+      dropdowns.select(".currency").insert("option", ":first-child").attr("class", "XPS").text("XPS");  
     } else {
-      dropdowns.select(".currency .XPR").remove();
+      dropdowns.select(".currency .XPS").remove();
     }
     
-    if (self.currency=='XPR') self.currency = dropdowns.select(".currency").node().value;
+    if (self.currency=='XPS') self.currency = dropdowns.select(".currency").node().value;
 
     var d = controls.select(".interval .selected").datum();
     loadData(d);
@@ -45,7 +45,7 @@ function CapChart(options) {
  
 //add currency dropdown    
   var currencyList = ["BTC", "USD", "CNY", "NZD", "AUD", "XRP", "XHP", "BIT", "XDG"];
-  if (self.dataType=='Transaction Volume') currencyList.unshift("XPR");
+  if (self.dataType=='Transaction Volume') currencyList.unshift("XPS");
   var currencyDropdown = payshares.currencyDropdown(currencyList).selected({currency:self.currency})
     .on("change", function(currency) {
       self.currency = currency;
@@ -191,7 +191,7 @@ function CapChart(options) {
       return;  
     } 
 
-    var issuers = self.currency=="XPR" ? [{currency:"XPR"}] : currencyDropdown.getIssuers(self.currency);    
+    var issuers = self.currency=="XPS" ? [{currency:"XPS"}] : currencyDropdown.getIssuers(self.currency);    
     for (var i=0; i<issuers.length; i++) {
       loadSendDataHelper(range, issuers[i], issuers.length);
     }       
@@ -276,7 +276,7 @@ function CapChart(options) {
       timeIncrement : range.interval,
       descending    : false,
       base          : base,
-      counter       : {currency:"XPR"}
+      counter       : {currency:"XPS"}
       
     }, function(data){  
       if (!tradeDataCache[currency]) 
@@ -668,7 +668,7 @@ function CapChart(options) {
     else if (self.dataType=='Trade Volume')   
       data = tradeDataCache[self.currency][self.range].legend;      
     
-    legend.style("display", self.currency == 'XPR' ? "none" : "block");     
+    legend.style("display", self.currency == 'XPS' ? "none" : "block");     
     var items = legend.selectAll(".item").data(data);
     var enter = items.enter().append("div").attr("class","item");
 

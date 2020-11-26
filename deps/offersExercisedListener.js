@@ -56,7 +56,7 @@ if (typeof require != 'undefined') {
  *
  *  Available options include:
  *  {
- *    base: {currency: "XPR"},
+ *    base: {currency: "XPS"},
  *    trade: {currency: "USD", issuer: "gDSSa75HPagWcvQmwH7D51dT5DPmvsKL4q"},
  *    
  *    reduce: true/false, // optional, defaults to false if timeIncrement is not set
@@ -347,7 +347,7 @@ function offersExercisedMap(doc, emit) {
                 payCurr = [node.PreviousFields.TakerPays.currency, node.PreviousFields.TakerPays.issuer];
                 payAmnt = node.PreviousFields.TakerPays.value - node.FinalFields.TakerPays.value;
             } else {
-                payCurr = ["XPR"];
+                payCurr = ["XPS"];
                 payAmnt = (node.PreviousFields.TakerPays - node.FinalFields.TakerPays) / 1000000.0; // convert from drops
                 exchangeRate = exchangeRate / 1000000.0;
             }
@@ -356,7 +356,7 @@ function offersExercisedMap(doc, emit) {
                 getCurr = [node.PreviousFields.TakerGets.currency, node.PreviousFields.TakerGets.issuer];
                 getAmnt = node.PreviousFields.TakerGets.value - node.FinalFields.TakerGets.value;
             } else {
-                getCurr = ["XPR"];
+                getCurr = ["XPS"];
                 getAmnt = (node.PreviousFields.TakerGets - node.FinalFields.TakerGets) / 1000000.0;
                 exchangeRate = exchangeRate * 1000000.0;
             }

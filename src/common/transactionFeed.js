@@ -100,7 +100,7 @@ var TransactionFeed = function (options) {
         row.currency1 = row.amount1.currency;
         row.amount1   = row.amount1.value;
       } else {
-        row.currency1 = "XPR";
+        row.currency1 = "XPS";
         row.amount1   = row.amount1/1000000;
       }
     }
@@ -109,7 +109,7 @@ var TransactionFeed = function (options) {
         row.currency2 = row.amount2.currency;
         row.amount2   = row.amount2.value;
       } else {
-        row.currency2 = "XPR";
+        row.currency2 = "XPS";
         row.amount2   = row.amount2/1000000;
       }
     }

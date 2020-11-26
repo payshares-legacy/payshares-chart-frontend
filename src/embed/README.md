@@ -34,7 +34,7 @@ of loading from the query string or from custom parameters.
 ####Embedded IFRAME:
 
 ```
-<iframe src='http://charts.payshares.org/embed/pricechart?theme=dark&type=line&counter={"currency":"USD","issuer":"gDSSa75HPagWcvQmwH7D51dT5DPmvsKL4q"}&base={"currency":"XPR"}'/>
+<iframe src='http://charts.payshares.org/embed/pricechart?theme=dark&type=line&counter={"currency":"USD","issuer":"gDSSa75HPagWcvQmwH7D51dT5DPmvsKL4q"}&base={"currency":"XPS"}'/>
 ```
 
 ####Javascript object:
@@ -58,7 +58,7 @@ of loading from the query string or from custom parameters.
 
  chart.load({
    base : {
-     "currency" : "XPR"
+     "currency" : "XPS"
    },
    counter : {
      "currency" : "USD",
@@ -77,7 +77,7 @@ of loading from the query string or from custom parameters.
  
  one.load({
    base : {
-     "currency" : "XPR"
+     "currency" : "XPS"
    },
    counter : {
      "currency" : "USD",
@@ -91,7 +91,7 @@ of loading from the query string or from custom parameters.
  
    two.load({
    base : {
-     "currency" : "XPR"
+     "currency" : "XPS"
    },
    counter : {
      "currency" : "USD",

@@ -46,7 +46,7 @@ angular.module( 'paysharescharts.markets', [
   
 //load settings from session, local storage, options, or defaults  
   $scope.base  = store.session.get('base') || store.get('base') || 
-    Options.base || {currency:"XPR", issuer:""};
+    Options.base || {currency:"XPS", issuer:""};
   
   $scope.trade = store.session.get('trade') || store.get('trade') || 
     Options.trade || {currency:"BTC", issuer:"gPwGQjiEZRy9k81qcFExHYvJ5Wf4qTna1c"};

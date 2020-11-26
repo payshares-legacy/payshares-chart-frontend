@@ -40,7 +40,7 @@
 
 //  this function is called to display currency then issuer    
     function loadDropdowns(selection) {
-      var currencies       = currencyList || ["XPR"].concat(d3.keys(accountsByCurrency).sort());
+      var currencies       = currencyList || ["XPS"].concat(d3.keys(accountsByCurrency).sort());
       var currencySelect   = selection.append("select").attr("class","currency").on("change", changeCurrency);
       var gateway          = selected && gatewayByAddress[selected.issuer];
       var selectedCurrency = selected ? selected.currency : null;
@@ -73,7 +73,7 @@
           event.change(currencySelect.node().value);  
         } else {
           var currency = currencySelect.node().value;
-          var list = currency == 'XPR' ? [""] : 
+          var list = currency == 'XPS' ? [""] : 
             accountsByCurrency[currency].map(function(d){
               return d.gateway.name;
             });
@@ -82,7 +82,7 @@
           
           option.enter().append("option").text(function(d){return d});
           option.exit().remove();
-          if (currency=="XPR") gatewaySelect.attr("disabled", "true");
+          if (currency=="XPS") gatewaySelect.attr("disabled", "true");
           else gatewaySelect.attr('disabled', null);
          
           
@@ -120,13 +120,13 @@
 //  issuer-currency instead of currency - issuer    
     function loaded(selection) {
       //loadDropdowns(selection);
-      var currencies = ["XPR"].concat(d3.keys(accountsByCurrency).sort()),
+      var currencies = ["XPS"].concat(d3.keys(accountsByCurrency).sort()),
         names        = [""].concat(d3.keys(gatewayByName).sort()),
         gateway      = selected && gatewayByAddress[selected.issuer];
 			
       var gatewaySelect = selection.append("select").attr("class","gateway").on("change", function() {
         var gateway = gatewayByName[gatewaySelect.selectAll(":checked").datum()],
-	       option     = currencySelect.selectAll("option").data(gateway ? gateway.currencies : ["XPR"], String);
+	       option     = currencySelect.selectAll("option").data(gateway ? gateway.currencies : ["XPS"], String);
 	              	
         option.enter().append("option").text(String);
         option.exit().remove();
@@ -142,7 +142,7 @@
       var currencySelect = selection.append("select").attr("class","currency").on("change", change);
       
       var option = currencySelect.selectAll("option")
-        .data(gateway ? gateway.currencies : ["XPR"], String)
+        .data(gateway ? gateway.currencies : ["XPS"], String)
         .enter().append("option")
         .text(String);
         	

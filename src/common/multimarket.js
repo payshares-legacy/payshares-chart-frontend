@@ -21,8 +21,8 @@ var MiniChart = function(base, counter, markets) {
   var width  = parseInt(self.div.style('width'), 10) - margin.left - margin.right;
   var height = width/2>150 ? width/2 : 150;
   
-  var baseCurrency    = base    ? payshares.Currency.from_json(base.currency).to_human()    : "XPR";
-  var counterCurrency = counter ? payshares.Currency.from_json(counter.currency).to_human() : "XPR";
+  var baseCurrency    = base    ? payshares.Currency.from_json(base.currency).to_human()    : "XPS";
+  var counterCurrency = counter ? payshares.Currency.from_json(counter.currency).to_human() : "XPS";
   
   if (markets.options.fixed) {
     header = self.div.append("div").attr("class","chartHeader");
@@ -107,7 +107,7 @@ var MiniChart = function(base, counter, markets) {
     markets.updateListHandler();
     if (!self.base || !self.counter ||
       (self.base.currency == self.counter.currency &&
-      self.counter.currency == "XPR")) return setStatus("Select a currency pair."); 
+      self.counter.currency == "XPS")) return setStatus("Select a currency pair."); 
 
     if (!update) {
       setStatus("");
@@ -442,8 +442,8 @@ var MultiMarket = function (options) {
       var data = [];
       for (var i=0; i<self.charts.length; i++) {
         if (!self.charts[i].base) continue;
-        else if (self.charts[i].base.currency=='XPR' &&
-          self.charts[i].counter.currency=='XPR') continue;
+        else if (self.charts[i].base.currency=='XPS' &&
+          self.charts[i].counter.currency=='XPS') continue;
         data.push({
           base    : self.charts[i].base,
           counter : self.charts[i].counter
