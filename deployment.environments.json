@@ -1,7 +1,7 @@
 {
   "development": {
-    "api"         : "http://localhost:5993/api",
-    "domain"      : "http://localhost",
+    "api"         : "http://api.payshares.org",
+    "domain"      : "http://charts.payshares.org",
     "maintenance" : false
   },
   
@@ -11,7 +11,7 @@
   },
   
   "production": {
-    "api"         : "https://data.payshares.org/api",
+    "api"         : "https://api.payshares.org",
     "domain"      : "https://charts.payshares.org"
   }
 }
