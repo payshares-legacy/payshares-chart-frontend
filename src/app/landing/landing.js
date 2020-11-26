@@ -22,11 +22,11 @@ angular.module( 'paysharescharts.landing', [
 
   var exchangeRates   = {};
   var valueCurrencies = {
-    "BTC" : "gPwGQjiEZRy9k81qcFExHYvJ5Wf4qTna1c", //OneCred
-    "USD" : "gs9HHU3pmkKBuvykhNm6xiK1JKrput9i3K", //Coinex
-    "CNY" : "gP1f4UKHbvdNDZPYyjqFHTnaqGzCwyjm5E", //RippleFox
-    "NZD" : "gs9HHU3pmkKBuvykhNm6xiK1JKrput9i3K", //Coinex
-    "AUS" : "gs9HHU3pmkKBuvykhNm6xiK1JKrput9i3K"  //Coinex
+    "BTC" : "x481ZDzTxWSybpWNxGcyTPF2WjiLjAqBut", //OneCred
+    "USD" : "xHnuiZT5GHPKct16Vw6Yc1XEJxjeXp8twW", //Coinex
+    "CNY" : "xNreXfour4tREhEBDUeExyCzjTdQSZ5BmQ", //RippleFox
+    "NZD" : "xp4BoSZP21NyZ6D3WxUbGs15JDCPRHxeix", //Coinex
+    "AUS" : "xKZwTZwA9f6McQ8f9SXMGSQmMcuQePvESU"  //Coinex
   };
   
   var totalAccounts
@@ -80,23 +80,23 @@ angular.module( 'paysharescharts.landing', [
   markets.list([
     {
       counter : {currency:"XPS"},
-      base    : {currency:"BTC", issuer:"gPwGQjiEZRy9k81qcFExHYvJ5Wf4qTna1c"}
+      base    : {currency:"BTC", issuer:"x481ZDzTxWSybpWNxGcyTPF2WjiLjAqBut"}
     },
     {
       counter : {currency:"XPS"},
-      base    : {currency:"BTC", issuer:"gs9HHU3pmkKBuvykhNm6xiK1JKrput9i3K"}
+      base    : {currency:"BTC", issuer:"xHnuiZT5GHPKct16Vw6Yc1XEJxjeXp8twW"}
     }, {
       counter : {currency:'XPS'},
-      base    : {currency:'USD', issuer:'gs9HHU3pmkKBuvykhNm6xiK1JKrput9i3K'}
+      base    : {currency:'USD', issuer:'xNreXfour4tREhEBDUeExyCzjTdQSZ5BmQ'}
     }, {
       counter : {currency:"XPS"},
-      base    : {currency:"CNY", issuer:"gP1f4UKHbvdNDZPYyjqFHTnaqGzCwyjm5E"}
+      base    : {currency:"CNY", issuer:"xp4BoSZP21NyZ6D3WxUbGs15JDCPRHxeix"}
     }, {
       counter : {currency:'XPS'},
-      base    : {currency:'NZD', issuer:'gs9HHU3pmkKBuvykhNm6xiK1JKrput9i3K'}
+      base    : {currency:'NZD', issuer:'xKZwTZwA9f6McQ8f9SXMGSQmMcuQePvESU'}
     }, {
       counter : {currency:"XPS"},
-      base    : {currency:"AUD", issuer:"gs9HHU3pmkKBuvykhNm6xiK1JKrput9i3K"}
+      base    : {currency:"AUD", issuer:"xPZfaSLhFBZ81Qjgts19yWEs15nFqt79Vc"}
     }
     ]);
 
