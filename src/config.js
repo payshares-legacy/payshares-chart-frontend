@@ -2,7 +2,7 @@
 
 Options = {
   theme     : "light",
-  base      : {currency:"BTC", issuer:"gDSSa75HPagWcvQmwH7D51dT5DPmvsKL4q"},
+  base      : {currency:"BTC", issuer:"x481ZDzTxWSybpWNxGcyTPF2WjiLjAqBut"},
   trade     : {currency:"XPS", issuer:""},
   chartType : "line",
   interval  : "1h",
@@ -13,7 +13,7 @@ Options = {
     trusted : false,
 
     servers: [
-      { host: 'one.vld.payshares.org', port: 5015, secure: true }
+      { host: 'one.vld.payshares.org', port: 5016, secure: true }
     ],
 
     connection_offset: 0
