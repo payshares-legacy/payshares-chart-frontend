@@ -3,7 +3,7 @@
     "mixpanel"    : "REPLACEME",
     "ga_account"  : "",
     "ga_id"       : "",
-    "api"         : "REPLACEME",
+    "api"         : ""http://localhost:5993/api",
     "domain"      : "http://localhost",
     "maintenance" : false
   },
@@ -12,8 +12,8 @@
     "mixpanel"    : "REPLACEME",
     "ga_account"  : "",
     "ga_id"       : "",
-    "api"         : "REPLACEME",
-    "domain"      : "http://staging.example.com",
+    "api"         : ""https://data-stg.payshares.org/api",
+    "domain"      : "https://stg.payshares.org",
     "bucket"      : "staging-bucket",
     "cloudflare_domain": "REPLACEME"
   },
@@ -22,8 +22,8 @@
     "mixpanel"    : "REPLACEME",
     "ga_account"  : "",
     "ga_id"       : "",
-    "api"         : "REPLACEME",
-    "domain"      : "http://example.com",
+    "api"         : ""https://data.payshares.org/api",
+    "domain"      : "https://payshares.org",
     "bucket"      : "production-bucket",
     "cloudflare_domain": "REPLACEME"
   }
