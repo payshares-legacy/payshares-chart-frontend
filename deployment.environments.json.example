@@ -13,7 +13,7 @@
     "ga_account"  : "",
     "ga_id"       : "",
     "api"         : ""https://data-stg.payshares.org/api",
-    "domain"      : "https://stg.payshares.org",
+    "domain"      : "https://charts-stg.payshares.org",
     "bucket"      : "staging-bucket",
     "cloudflare_domain": "REPLACEME"
   },
@@ -23,7 +23,7 @@
     "ga_account"  : "",
     "ga_id"       : "",
     "api"         : ""https://data.payshares.org/api",
-    "domain"      : "https://payshares.org",
+    "domain"      : "https://charts.payshares.org",
     "bucket"      : "production-bucket",
     "cloudflare_domain": "REPLACEME"
   }
